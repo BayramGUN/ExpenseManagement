@@ -1,5 +1,4 @@
 
-using ExpenseManagement.Base.Extensions.Encryption;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -22,16 +21,23 @@ public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
         builder.Property(x => x.UpdateUserId).IsRequired(false);
         builder.Property(x => x.IsActive).IsRequired(true).HasDefaultValue(true);
     
+        builder.Property(x => x.IdentityNumber).IsRequired(true).HasMaxLength(11);
         builder.Property(x => x.FirstName).IsRequired(true).HasMaxLength(50);
         builder.Property(x => x.LastName).IsRequired(true).HasMaxLength(50);
         builder.Property(x => x.UserName).IsRequired(true).HasMaxLength(50);
-        builder.Property(x => x.Password).IsRequired(true).HasMaxLength(250);
         builder.Property(x => x.Email).IsRequired(true).HasMaxLength(50);
+        builder.Property(x => x.Password).IsRequired(true).HasMaxLength(250);
         builder.Property(x => x.Role).IsRequired(true).HasMaxLength(30);
         builder.Property(x => x.LastActivityDate).IsRequired(true);
         builder.Property(x => x.PasswordRetryCount).IsRequired(true);
         builder.Property(x => x.Status).IsRequired(true);
+        builder.Property(x => x.IBAN).IsRequired(true).HasMaxLength(34);
 
-        builder.HasIndex(x => x.UserName).IsUnique(true);
+        builder.HasIndex(x => x.IdentityNumber).IsUnique(true);
+        builder.HasIndex(x => x.Email).IsUnique(true);
+
+        builder.HasMany(x => x.Expenses)
+            .WithOne(x => x.AppUser)
+            .HasForeignKey(x => x.AppUserId);
     }
 }

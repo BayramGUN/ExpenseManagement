@@ -4,6 +4,7 @@ using ExpenseManagement.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpenseManagement.Api.Migrations
 {
     [DbContext(typeof(ExpenseManagementDbContext))]
-    partial class ExpenseManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240116025031_ExpenseApprovalTableConfigurated")]
+    partial class ExpenseApprovalTableConfigurated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

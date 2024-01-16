@@ -40,6 +40,8 @@ public static class DbSeedOperations
                 {
                     Id = 0,
                     UserName = DefaultUsers.DefaultAdminUserName,
+                    IdentityNumber = "11111111111",
+                    IBAN = "TR310006285458942714869531",
                     Role = UserRole.Admin,
                     Email = DefaultUsers.DefaultAdminEmail,
                     FirstName = DefaultUsers.DefaultAdminFirstName,
@@ -53,6 +55,8 @@ public static class DbSeedOperations
                 new()
                 {
                     Id = 0,
+                    IdentityNumber = "11111111102",
+                    IBAN = "TR660006241864652728546171",
                     UserName = DefaultUsers.DefaultEmployeeUserName,
                     Role = UserRole.Employee,
                     Email = DefaultUsers.DefaultEmployeeEmail,

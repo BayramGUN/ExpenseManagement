@@ -4,6 +4,7 @@ using ExpenseManagement.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpenseManagement.Api.Migrations
 {
     [DbContext(typeof(ExpenseManagementDbContext))]
-    partial class ExpenseManagementDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240116022332_ExpenseApprovalTableCreated")]
+    partial class ExpenseApprovalTableCreated
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -197,55 +200,7 @@ namespace ExpenseManagement.Api.Migrations
 
                     b.HasIndex("ExpenseId");
 
-                    b.ToTable("ExpenseApprovals");
-                });
-
-            modelBuilder.Entity("ExpenseManagement.Data.Entities.Payment", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("Amount")
-                        .HasPrecision(18, 2)
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int>("ExpenseId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("InsertDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("InsertUserId")
-                        .HasColumnType("int");
-
-                    b.Property<bool?>("IsActive")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bit")
-                        .HasDefaultValue(true);
-
-                    b.Property<DateTime>("PaymentDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("PaymentMethod")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime?>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UpdateUserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExpenseId")
-                        .IsUnique();
-
-                    b.ToTable("Payments");
+                    b.ToTable("ExpenseApproval");
                 });
 
             modelBuilder.Entity("ExpenseManagement.Data.Entities.Expense", b =>
@@ -264,25 +219,16 @@ namespace ExpenseManagement.Api.Migrations
                     b.HasOne("AppUser", "Approver")
                         .WithMany()
                         .HasForeignKey("ApproverId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ExpenseManagement.Data.Entities.Expense", "Expense")
                         .WithMany("ExpenseApprovals")
                         .HasForeignKey("ExpenseId")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Approver");
-
-                    b.Navigation("Expense");
-                });
-
-            modelBuilder.Entity("ExpenseManagement.Data.Entities.Payment", b =>
-                {
-                    b.HasOne("ExpenseManagement.Data.Entities.Expense", "Expense")
-                        .WithOne("Payment")
-                        .HasForeignKey("ExpenseManagement.Data.Entities.Payment", "ExpenseId");
 
                     b.Navigation("Expense");
                 });
@@ -295,8 +241,6 @@ namespace ExpenseManagement.Api.Migrations
             modelBuilder.Entity("ExpenseManagement.Data.Entities.Expense", b =>
                 {
                     b.Navigation("ExpenseApprovals");
-
-                    b.Navigation("Payment");
                 });
 #pragma warning restore 612, 618
         }

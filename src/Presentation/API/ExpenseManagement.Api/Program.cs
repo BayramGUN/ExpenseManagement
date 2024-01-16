@@ -28,7 +28,8 @@ using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
 var context = services.GetRequiredService<ExpenseManagementDbContext>();
 context.Database.EnsureCreated();
-DbSeedOperations.SeedDatabase(context, builder.Configuration);
+
+//DbSeedOperations.SeedDatabase(context, builder.Configuration);
 
 app.UseHttpsRedirection();
 

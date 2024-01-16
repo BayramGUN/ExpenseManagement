@@ -1,3 +1,4 @@
+using ExpenseManagement.Data.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseManagement.Data.DbContexts;
@@ -21,6 +22,21 @@ public class ExpenseManagementDbContext : DbContext
     /// Gets or sets the DbSet for the AppUser entity, providing access to the AppUsers table.
     /// </summary>
     public DbSet<AppUser> AppUsers { get; set; } = null!;
+
+    /// <summary>
+    /// Gets or sets the DbSet for the Expense entity, providing access to the Expenses table.
+    /// </summary>
+    public DbSet<Expense> Expenses { get; set; } = null!;
+
+    /// <summary>
+    /// Gets or sets the DbSet for the ExpenseApproval entity, providing access to the ExpenseApprovals table.
+    /// </summary>
+    public DbSet<ExpenseApproval> ExpenseApprovals { get; set; } = null!;
+
+    /// <summary>
+    /// Gets or sets the DbSet for the Payment entity, providing access to the Payments table.
+    /// </summary>
+    public DbSet<Payment> Payments { get; set; } = null!;
 
     /// <summary>
     /// Configures the model of the database, including applying entity configurations from the ExpenseManagement assembly.
