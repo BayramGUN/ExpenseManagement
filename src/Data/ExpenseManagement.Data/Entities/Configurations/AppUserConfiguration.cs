@@ -15,6 +15,8 @@ public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
     /// <param name="builder">The entity type builder for the AppUser entity.</param>
     public void Configure(EntityTypeBuilder<AppUser> builder)
     {
+        builder.Property(x => x.Id).ValueGeneratedOnAdd();
+
         builder.Property(x => x.InsertDate).IsRequired(true);
         builder.Property(x => x.InsertUserId).IsRequired(true);
         builder.Property(x => x.UpdateDate).IsRequired(false);
@@ -26,6 +28,7 @@ public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
         builder.Property(x => x.LastName).IsRequired(true).HasMaxLength(50);
         builder.Property(x => x.UserName).IsRequired(true).HasMaxLength(50);
         builder.Property(x => x.Email).IsRequired(true).HasMaxLength(50);
+        builder.Property(x => x.Phone).IsRequired(true).HasMaxLength(10);
         builder.Property(x => x.Password).IsRequired(true).HasMaxLength(250);
         builder.Property(x => x.Role).IsRequired(true).HasMaxLength(30);
         builder.Property(x => x.LastActivityDate).IsRequired(true);
@@ -35,6 +38,7 @@ public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
 
         builder.HasIndex(x => x.IdentityNumber).IsUnique(true);
         builder.HasIndex(x => x.Email).IsUnique(true);
+        builder.HasIndex(x => x.Phone).IsUnique(true);
 
         builder.HasMany(x => x.Expenses)
             .WithOne(x => x.AppUser)

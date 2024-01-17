@@ -11,5 +11,5 @@ public class ExpenseApproval : BaseEntityWithId
     public virtual AppUser? Approver { get; set; }
     public virtual int ApproverId { get; set; }
 
-    public Status ApprovalStatus { get; set; } // Approved, Rejected
+    public Status ApprovalStatus { get; set; }
 }

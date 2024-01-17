@@ -10,7 +10,7 @@ public abstract class BaseEntityWithId : BaseEntity
     /// <summary>
     /// Gets or sets the unique identifier for the entities.
     /// </summary>
-    public required int Id { get; set; }
+    public int Id { get; set; }
 }
 public abstract class BaseEntity
 {

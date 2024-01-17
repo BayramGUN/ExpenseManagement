@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using ExpenseManagement.Base.Constants.Authentication;
 using ExpenseManagement.Base.Enums;
 using ExpenseManagement.Base.Extensions.Encryption;
@@ -21,7 +20,7 @@ public static class DbSeedOperations
         ExpenseManagementDbContext dbContext, 
         ConfigurationManager configuration)
     {
-        seedUserIFNotExist(dbContext, configuration);
+        SeedUserIfNotExist(dbContext, configuration);
     }
 
     /// <summary>
@@ -29,7 +28,7 @@ public static class DbSeedOperations
     /// </summary>
     /// <param name="dbContext">The DbContext for the ExpenseManagement database.</param>
     /// <param name="configuration">The configuration containing necessary settings.</param>
-    private static void seedUserIFNotExist(
+    private static void SeedUserIfNotExist(
         ExpenseManagementDbContext dbContext, 
         IConfiguration configuration)
     {
@@ -38,34 +37,34 @@ public static class DbSeedOperations
             var AppUsers = new List<AppUser> {
                 new()
                 {
-                    Id = 0,
                     UserName = DefaultUsers.DefaultAdminUserName,
-                    IdentityNumber = "11111111111",
-                    IBAN = "TR310006285458942714869531",
+                    IdentityNumber = DefaultUsers.DefaultAdminIdentityNumber,
+                    IBAN = DefaultUsers.DefaultAdminIBAN,
                     Role = UserRole.Admin,
                     Email = DefaultUsers.DefaultAdminEmail,
+                    Phone = DefaultUsers.DefaultAdminPhone,
                     FirstName = DefaultUsers.DefaultAdminFirstName,
                     LastName = DefaultUsers.DefaultAdminLastName,
                     InsertUserId = 1,
                     InsertDate = DateTime.Now,
                     PasswordRetryCount = 0,
-                    Status = true,
+                    Status = false,
                     Password = configuration[DefaultUsers.DefaultAdminPassword]!.GetSHA256Hash()
                 },
                 new()
                 {
-                    Id = 0,
-                    IdentityNumber = "11111111102",
-                    IBAN = "TR660006241864652728546171",
+                    IdentityNumber = DefaultUsers.DefaultEmployeeIdentityNumber,
+                    IBAN = DefaultUsers.DefaultEmployeeIBAN,
                     UserName = DefaultUsers.DefaultEmployeeUserName,
                     Role = UserRole.Employee,
                     Email = DefaultUsers.DefaultEmployeeEmail,
+                    Phone = DefaultUsers.DefaultEmployeePhone,
                     FirstName = DefaultUsers.DefaultEmployeeFirstName,
                     LastName = DefaultUsers.DefaultEmployeeLastName,
                     InsertUserId = 1,
                     InsertDate = DateTime.Now,
                     PasswordRetryCount = 0,
-                    Status = true,
+                    Status = false,
                     Password = configuration[DefaultUsers.DefaultEmployeePassword]!.GetSHA256Hash()
                 }
             };

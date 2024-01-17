@@ -1,0 +1,16 @@
+@host=https://localhost:7066
+
+POST {{host}}/api/Authentication
+Content-Type: application/json
+
+{
+  "userName": "abuzer12",
+  "password": "Abuzer!123",
+  "iban": "TR240006233335524967892512",
+  "firstName": "abuzer",
+  "lastName": "kömürcü",
+  "email": "abuzer@komurcu.com",
+  "identityNumber": "12312322441",
+  "phone": "1231232233",
+  "role": "Admin"
+}

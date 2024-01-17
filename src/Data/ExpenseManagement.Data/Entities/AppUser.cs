@@ -9,6 +9,7 @@ public class AppUser : BaseEntityWithId
     public required string FirstName { get; set; }
     public required string LastName { get; set; }
     public required string Email { get; set; }
+    public required string Phone { get; set; }
     public required string IBAN { get; set; }
     public required string IdentityNumber { get; set; }
     public required UserRole Role { get; set;}
