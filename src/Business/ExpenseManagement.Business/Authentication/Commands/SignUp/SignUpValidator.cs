@@ -4,6 +4,8 @@ using System.Text.RegularExpressions;
 using System.Data;
 using ExpenseManagement.Base.Constants.Regex;
 using ExpenseManagement.Base.Constants.Messages;
+using ExpenseManagement.Business.Authentication.Extensions;
+
 
 namespace ExpenseManagement.Business.Authentication.Commands.SignUp;
 
@@ -16,7 +18,7 @@ public class SignUpValidator : AbstractValidator<SignUpRequest>
             .WithMessage((model, email) => ValidationMessages.InvalidEmail(email));
 
         RuleFor(x => x.Phone).NotNull().NotEmpty()
-            .Must((model, phone) => IsValidPhone(phone))
+            .Must((model, phone) => phone.IsValidPhone())
             .WithMessage((model, phone) => ValidationMessages.InvalidPhoneNumber(phone));
 
         RuleFor(x => x.FirstName).NotNull().NotEmpty()
@@ -42,23 +44,5 @@ public class SignUpValidator : AbstractValidator<SignUpRequest>
             .Matches(RegexStrings.SymbolsRegex).WithMessage(ValidationMessages.PasswordMustHasSymbol);
 
         RuleFor(x => x.UserName).MinimumLength(4).MaximumLength(20);
-    }
-    private bool IsValidPhone(string Phone)
-    {
-        try
-        {
-            if (string.IsNullOrEmpty(Phone))
-                return false;
-            var regex = new Regex(RegexStrings.PhoneRegex);
-            return regex.IsMatch(Phone);
-        }
-        catch (ArgumentNullException exception)
-        {
-            throw new ArgumentNullException(exception.Message);
-        }
-        catch (RegexMatchTimeoutException exception)
-        {
-            throw new RegexMatchTimeoutException(exception.Message);
-        }
     }
 }

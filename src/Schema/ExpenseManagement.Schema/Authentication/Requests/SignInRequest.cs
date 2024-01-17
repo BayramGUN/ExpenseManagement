@@ -2,8 +2,9 @@ using ExpenseManagement.Base.Schema;
 
 namespace ExpenseManagement.Schema.Authentication.Requests;
 
-public class SignInRequest : BaseRequest
+public class SignInRequest
 {
+    public int Id { get; set; }
     public string? UserName { get; set; }
     public string? Phone { get; set; }
     public string? IdentityNumber { get; set; }

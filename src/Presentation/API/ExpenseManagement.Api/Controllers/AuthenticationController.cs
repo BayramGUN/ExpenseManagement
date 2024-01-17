@@ -21,10 +21,17 @@ public class AuthenticationController : ControllerBase
         this.mediator = mediator;
     }
 
-    [HttpPost]
+    [HttpPost(EndpointRoute.SignUp)]
     public async Task<ApiResponse<TokenResponse>> SignUp([FromBody] SignUpRequest request)
     {
         var operation = new SignUpCommand(request);
+        var result = await mediator.Send(operation);
+        return result;
+    }
+    [HttpPost(EndpointRoute.SignIn)]
+    public async Task<ApiResponse<TokenResponse>> SignIn([FromBody] SignInRequest request)
+    {
+        var operation = new SignInCommand(request);
         var result = await mediator.Send(operation);
         return result;
     }

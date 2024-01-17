@@ -57,11 +57,12 @@ public class AppUserRepository : IAppUserRepository
             await dbContext.Set<AppUser>()
                 .Include(e => e.Expenses)
                 .Where(
-                    x => string.Equals(x.IdentityNumber, identityNumber, StringComparison.OrdinalIgnoreCase) || 
-                    x.Id == id ||
-                    string.Equals(x.Email, email, StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(x.UserName, userName, StringComparison.OrdinalIgnoreCase) ||
-                    string.Equals(x.Phone, phone, StringComparison.OrdinalIgnoreCase))
+                        x => identityNumber!.Equals(x.IdentityNumber) || 
+                        x.Id == id ||
+                        email!.Equals(x.Email) ||
+                        userName!.Equals(x.UserName) ||
+                        phone!.Equals(x.Phone)
+                    )
                 .FirstOrDefaultAsync((CancellationToken)cancellationToken!) ?? default!;
     /// <summary>
     /// Updates an existing AppUser in the repository.
