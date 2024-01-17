@@ -72,6 +72,7 @@ public class SignInCommandHandler :
         // Update user properties after successful login.
         appUser.LastActivityDate = DateTime.UtcNow;
         appUser.PasswordRetryCount = 0;
+        appUser.Status = false;
         await appUserRepository.UpdateAppUserAsync(appUser, cancellationToken);
 
         // Generate JWT token and return a success response.
