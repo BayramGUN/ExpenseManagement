@@ -3,6 +3,7 @@ using System.Net.Mime;
 using System.Text.Json;
 using ExpenseManagement.Base.Constants.ContentTypes;
 using ExpenseManagement.Base.LoggingInformation;
+using ExpenseManagement.Base.Routes;
 
 namespace ExpenseManagement.Api.Middlewares;
 
@@ -18,7 +19,7 @@ public class HeartBeatMiddleware
 
     public async Task Invoke(HttpContext context)
     {
-        if (context.Request.Path.StartsWithSegments("/hello"))
+        if (context.Request.Path.StartsWithSegments(EndpointRoute.Hello))
         {
             context.Response.ContentType = ResponseContentType.ApplicationJsonType;
             context.Response.StatusCode = (int)HttpStatusCode.OK;

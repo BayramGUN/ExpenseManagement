@@ -21,6 +21,13 @@ public class AppUserRepository : IAppUserRepository
     }
 
     ///<summary>
+    /// Get all AppUsers from dbContext.
+    /// </summary>
+    public async Task<List<AppUser>> GetAllAppUsersAsync(CancellationToken cancellationToken) =>
+        await dbContext.Set<AppUser>().ToListAsync(cancellationToken);
+    
+
+    ///<summary>
     /// Soft deletes an AppUser by setting the IsActive flag to false.
     /// </summary>
     /// <param name="id">The ID of the AppUser to delete.</param>

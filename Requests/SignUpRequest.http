@@ -4,7 +4,7 @@ POST {{host}}/api/Authentication
 Content-Type: application/json
 
 {
-  "userName": "abuzer12",
+  "userName": "abuzer72",
   "password": "Abuzer!123",
   "iban": "TR240006233335524967892512",
   "firstName": "abuzer",

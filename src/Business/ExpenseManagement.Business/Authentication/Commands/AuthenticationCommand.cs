@@ -15,3 +15,8 @@ public record SignUpCommand(SignUpRequest Model) : IRequest<ApiResponse<TokenRes
 /// </summary>
 public record SignInCommand(SignInRequest Model) : IRequest<ApiResponse<TokenResponse>>;
 
+/// <summary>
+/// Represents a command to unblock an application user by their UserName/Email/IdentityNumber/Phone and password.
+/// </summary>
+public record UnBlockAppUserCommand(UnBlockAppUserRequest Model) : IRequest<ApiResponse<TokenResponse>>;
+

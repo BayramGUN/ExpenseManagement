@@ -44,6 +44,11 @@ public interface IAppUserRepository
             CancellationToken? cancellationToken = null
         );
 
+    ///<summary>
+    /// Get all AppUsers from dbContext.
+    /// </summary>
+    Task<List<AppUser>> GetAllAppUsersAsync(CancellationToken cancellationToken);
+
     /// <summary>
     /// Checks if an AppUser entity is unique based on certain criteria.
     /// </summary>

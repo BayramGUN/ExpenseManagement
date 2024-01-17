@@ -4,11 +4,11 @@ using ExpenseManagement.Base.Constants.Messages;
 using ExpenseManagement.Business.Authentication.Extensions;
 
 
-namespace ExpenseManagement.Business.Authentication.Commands.SignIn;
+namespace ExpenseManagement.Business.Authentication.Commands;
 
-public class SignInValidator : AbstractValidator<SignInRequest>
+public class UnBlockAppUserValidator : AbstractValidator<UnBlockAppUserRequest>
 {
-    public SignInValidator()
+    public UnBlockAppUserValidator()
     {
         RuleFor(x => x.Email).NotNull().NotEmpty()
             .EmailAddress()

@@ -7,25 +7,25 @@ using ExpenseManagement.Data.Repositories.Interfaces.AppUsers;
 using ExpenseManagement.Schema.Authentication.Responses;
 using MediatR;
 
-namespace ExpenseManagement.Business.Authentication.Commands.SignIn;
+namespace ExpenseManagement.Business.Authentication.Commands.UnBlockAppUser;
 
 /// <summary>
-/// Handles the logic for the SignInCommand to authenticate users.
+/// Handles the logic for the UnBlockAppUserCommand to authenticate users.
 /// </summary>
-public class SignInCommandHandler : 
-    IRequestHandler<SignInCommand, ApiResponse<TokenResponse>>
+public class UnBlockAppUserCommandHandler : 
+    IRequestHandler<UnBlockAppUserCommand, ApiResponse<TokenResponse>>
 {
     private readonly IMapper mapper;
     private readonly IAppUserRepository appUserRepository;
     private readonly IJwtTokenGenerator tokenGenerator;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="SignInCommandHandler"/> class.
+    /// Initializes a new instance of the <see cref="UnBlockAppUserCommandHandler"/> class.
     /// </summary>
     /// <param name="mapper">The AutoMapper instance.</param>
     /// <param name="appUserRepository">The repository for AppUser entities.</param>
     /// <param name="tokenGenerator">The JWT token generator service.</param>
-    public SignInCommandHandler(
+    public UnBlockAppUserCommandHandler(
         IMapper mapper,
         IAppUserRepository appUserRepository,
         IJwtTokenGenerator tokenGenerator)
@@ -36,12 +36,12 @@ public class SignInCommandHandler :
     }
     
     /// <summary>
-    /// Handles the SignInCommand, authenticating users based on provided credentials.
+    /// Handles the UnBlockAppUserCommand, authenticating users based on provided credentials.
     /// </summary>
-    /// <param name="request">The SignInCommand containing user credentials.</param>
+    /// <param name="request">The UnBlockAppUserCommand containing user credentials.</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations.</param>
     /// <returns>An ApiResponse containing a TokenResponse or an error message.</returns>
-    public async Task<ApiResponse<TokenResponse>> Handle(SignInCommand request, CancellationToken cancellationToken)
+    public async Task<ApiResponse<TokenResponse>> Handle(UnBlockAppUserCommand request, CancellationToken cancellationToken)
     {
         // Retrieve the AppUser based on the provided credentials
         var appUser = await appUserRepository.GetAppUserByParameter(
@@ -57,11 +57,15 @@ public class SignInCommandHandler :
             return new ApiResponse<TokenResponse>(ExceptionMessages.InvalidCredentials);
 
         // Check if the provided password matches the stored hashed password
-        string hashedPasswordCredential = request.Model.Password.GetSHA256Hash();
+        string hashedPasswordCredential = request.Model.TemporaryPassword;
         if(!hashedPasswordCredential.Equals(appUser.Password))
         {
             // Update user status and password-related properties on failed login attempts
-            appUser.Status = (appUser.PasswordRetryCount > 3) ? true : false;
+            if(appUser.PasswordRetryCount > 3)
+            {
+                await appUserRepository.DeleteAppUserAsync(appUser.Id, cancellationToken);
+                return new ApiResponse<TokenResponse>(ExceptionMessages.DeletedUser);
+            }
             appUser.LastActivityDate = DateTime.UtcNow;
             appUser.PasswordRetryCount++;
             await appUserRepository.UpdateAppUserAsync(appUser, cancellationToken);
@@ -71,7 +75,7 @@ public class SignInCommandHandler :
         
 
         // If the user is blocked, return an error response
-        if(appUser.Status)
+        if(!appUser.Status)
             // TODO: May add a save account service.
             return new ApiResponse<TokenResponse>(ExceptionMessages.BlockedUser);
 
@@ -79,6 +83,7 @@ public class SignInCommandHandler :
         appUser.LastActivityDate = DateTime.UtcNow;
         appUser.PasswordRetryCount = 0;
         appUser.Status = false;
+        appUser.Password = request.Model.Password.GetSHA256Hash();
         await appUserRepository.UpdateAppUserAsync(appUser, cancellationToken);
 
         // Generate JWT token and return a success response.

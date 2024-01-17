@@ -19,4 +19,7 @@ public class DefaultUsers
     public const string DefaultEmployeeFirstName = "Hayri"; 
     public const string DefaultEmployeeLastName = "Petek"; 
 
+    public const string ValidChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!?*.";
+
+
 }
