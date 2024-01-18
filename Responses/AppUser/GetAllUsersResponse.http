@@ -2,7 +2,7 @@
 @token=ey.JjLBw..
 
 GET {{host}}/api/AppUsers
-
+Authorization: Bearer {{token}}
 # Response like below:
 #{
 #  "response": [

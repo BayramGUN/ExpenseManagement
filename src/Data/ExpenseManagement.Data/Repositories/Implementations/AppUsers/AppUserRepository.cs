@@ -1,3 +1,4 @@
+using ExpenseManagement.Base.Enums;
 using ExpenseManagement.Data.DbContexts;
 using ExpenseManagement.Data.Repositories.Interfaces.AppUsers;
 using Microsoft.EntityFrameworkCore;
@@ -118,4 +119,41 @@ public class AppUserRepository : IAppUserRepository
                 x.UserName! == entity.UserName )
             .FirstOrDefaultAsync(cancellationToken) is null;
 
+    /// <summary>
+    /// Filters a list of AppUsers based on optional parameters such as first name, last name, role, activity status, and user status.
+    /// </summary>
+    /// <param name="firstName">Optional parameter for filtering by first name.</param>
+    /// <param name="lastName">Optional parameter for filtering by last name.</param>
+    /// <param name="role">Optional parameter for filtering by user role.</param>
+    /// <param name="isActive">Optional parameter for filtering by user activity status.</param>
+    /// <param name="status">Optional parameter for filtering by user status.</param>
+    /// <param name="cancellationToken">Optional cancellation token.</param>
+    /// <returns>A list of filtered AppUsers.</returns>
+    public async Task<List<AppUser>> FilterAppUsersByParameter(
+        string? firstName = null,
+        string? lastName = null,
+        UserRole? role = null,
+        bool? isActive = null,
+        bool? status = null,
+        CancellationToken? cancellationToken = null)
+    {
+        var query = dbContext.Set<AppUser>().Include(e => e.Expenses).AsQueryable();
+
+        if (firstName != null)
+            query = query.Where(x => string.Equals(x.FirstName.ToLower(), firstName.ToLower()));
+
+        if (lastName != null)
+            query = query.Where(x => string.Equals(x.LastName.ToLower(), lastName.ToLower()));
+
+        if (role != null)
+            query = query.Where(x => x.Role == role.Value);
+
+        if (isActive != null)
+            query = query.Where(x => x.IsActive == isActive);
+
+        if (status != null)
+            query = query.Where(x => x.Status == status);
+
+        return await query.ToListAsync(cancellationToken ?? CancellationToken.None);
+    }
 }

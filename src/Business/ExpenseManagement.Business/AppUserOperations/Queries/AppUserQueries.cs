@@ -10,3 +10,5 @@ public record GetAppUserByParameterQuery(GetUserByParameterRequest Model)
 
 public record GetAllAppUsersQuery() 
     : IRequest<ApiResponse<List<AppUserResponse>>>;
+public record GetAppUsersByParameterQuery(GetUsersByParameterRequest Model) 
+    : IRequest<ApiResponse<List<AppUserResponse>>>;

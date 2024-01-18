@@ -1,3 +1,5 @@
+using ExpenseManagement.Base.Enums;
+
 namespace ExpenseManagement.Data.Repositories.Interfaces.AppUsers;
 
 /// <summary>
@@ -41,6 +43,25 @@ public interface IAppUserRepository
             string? email = null,
             string? userName = null,
             string? phone = null,
+            CancellationToken? cancellationToken = null
+        );
+
+    /// <summary>
+    /// Retrieves an AppUsers from the repository based on the specified parameters.
+    /// </summary>
+    /// <param name="firstName">The first name of the AppUsers to retrieve (optional).</param>
+    /// <param name="lastName">The last name of the AppUsers to retrieve (optional).</param>
+    /// <param name="role">The role of the AppUsers to retrieve (optional).</param>
+    /// <param name="isActive">The isActive of the AppUsers to retrieve (optional).</param>
+    /// <param name="status">The status of the AppUsers to retrieve (optional).</param>
+    /// <param name="cancellationToken">The cancellation token for handling asynchronous operations (optional).</param>
+    /// <returns>The retrieved AppUsers.</returns>
+    Task<List<AppUser>> FilterAppUsersByParameter(
+            string? firstName = null,
+            string? lastName = null,
+            UserRole? role = null,
+            bool? isActive = null,
+            bool? status = null,
             CancellationToken? cancellationToken = null
         );
 

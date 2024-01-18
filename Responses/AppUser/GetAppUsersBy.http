@@ -1,0 +1,36 @@
+@host=https://localhost:7066
+@token=ey.JjLBw..
+
+#optional
+@firstName=Hayri
+#optional
+@role=1
+#optional
+@status=false
+#optional
+@isActive=true
+#optional
+@lastName=Petek
+
+
+GET {{host}}/api/AppUsers/GetAppUsersBy?LastName={{lastName}}&isActive={{isActive}}&role={{role}}&firstName={{firstName}}&status={{status}}
+Authorization: Bearer {{token}}
+
+# Success response will be like that:
+#{
+#  "response": [
+#    {
+#      "userName": "DefaultEmployee",
+#      "fullName": "Hayri Petek",
+#      "email": "default@employee.com",
+#      "role": "Employee",
+#      "lastActivityDate": "0001-01-01T00:00:00",
+#      "passwordRetryCount": 0,
+#      "status": 0
+#    }
+#  ],
+#  "success": true,
+#  "message": "Success",
+#  "serverDate": "2024-01-18T02:24:26.5085784Z",
+#  "referenceNo": "6d916c1a-2f3a-4908-99bc-144876a353b8"
+#}

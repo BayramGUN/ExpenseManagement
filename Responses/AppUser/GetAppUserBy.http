@@ -1,0 +1,17 @@
+@host=https://localhost:7066
+@token=ey.JjLBw..
+
+#optional
+@userName=DefaultEmployee
+#optional
+@phone=5555555554
+#optional
+@identityNumber=11111111102
+#optional
+@email=default@employee.com
+#optional
+@id=2
+
+
+GET {{host}}/api/AppUsers/GetAppUserBy?Id={{id}}&Email={{email}}&Phone={{phone}}&UserName={{userName}}&IdentityNumber={{identityNumber}}
+#Authorization: Bearer {{token}}

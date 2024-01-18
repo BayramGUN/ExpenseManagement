@@ -1,13 +1,10 @@
+using ExpenseManagement.Base.Constants.Authorization;
 using ExpenseManagement.Base.Response;
 using ExpenseManagement.Base.Routes;
 using ExpenseManagement.Business.AppUserOperations.Commands;
 using ExpenseManagement.Business.AppUserOperations.Queries;
-using ExpenseManagement.Business.Authentication.Commands;
-using ExpenseManagement.Business.Authentication.Commands.SignUp;
 using ExpenseManagement.Schema.AppUser.Requests;
 using ExpenseManagement.Schema.AppUser.Responses;
-using ExpenseManagement.Schema.Authentication.Requests;
-using ExpenseManagement.Schema.Authentication.Responses;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ExpenseManagement.Api.Controllers;
 
 
+[Authorize(Roles = RoleStrings.AdminRole)]
 [Route(ControllerRoute.BaseRoute)]
 [ApiController]
 public class AppUserController : ControllerBase
@@ -42,6 +40,15 @@ public class AppUserController : ControllerBase
         var result = await mediator.Send(operation);
         return result;
     }
+    
+    [HttpGet(EndpointRoute.GetAppUsersBy)]
+    public async Task<ApiResponse<List<AppUserResponse>>> GetUsersByAnyParameter(
+        [FromQuery] GetUsersByParameterRequest request)
+    {
+        var operation = new GetAppUsersByParameterQuery(request);
+        var result = await mediator.Send(operation);
+        return result;
+    }
 
     [HttpGet(EndpointRoute.GetAppUserById)]
     public async Task<ApiResponse<AppUserResponse>> GetUserById(
@@ -49,13 +56,12 @@ public class AppUserController : ControllerBase
     {
         var operation = new GetAppUserByParameterQuery(new GetUserByParameterRequest
         {
-            UserId = id
+            Id = id
         });
         var result = await mediator.Send(operation);
         return result;
     }
     
-    [Authorize(Roles = "Admin")]
     [HttpDelete(EndpointRoute.Delete)]
     public async Task<ApiResponse> DeleteAppUser([FromRoute] int id)
     {
@@ -73,7 +79,8 @@ public class AppUserController : ControllerBase
     }
 
     [HttpPost(EndpointRoute.Create)]
-    public async Task<ApiResponse<CreatedAppUserResponse>> SignUp([FromBody] CreateAppUserRequest request)
+    public async Task<ApiResponse<CreatedAppUserResponse>> SignUp(
+        [FromBody] CreateAppUserRequest request)
     {
         var operation = new CreateAppUserCommand(request);
         var result = await mediator.Send(operation);
