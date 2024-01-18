@@ -35,12 +35,14 @@ public class MapperConfig : Profile
             .ForMember(dest => dest.InsertDate,
                 opt => opt.MapFrom(src => src.RequestTimestamp))
             .ForMember(dest => dest.Status,
-                opt => opt.MapFrom(src => true));
+                opt => opt.MapFrom(src => src.Status));
         
         // Map CreateAppUserRequest to AppUser, specifying custom mappings
         CreateMap<AppUser, CreatedAppUserResponse>()
             .ForMember(dest => dest.TemporaryPassword,
-                opt => opt.MapFrom(src => src.Password));
+                opt => opt.MapFrom(src => src.Password))
+            .ForMember(dest => dest.FullName,
+                opt => opt.MapFrom(src => AppUserMappingStrings.AppUserFullName(src.FirstName, src.LastName)));
 
         // Map UpdateAppUserRequest to AppUser, specifying custom mappings
         CreateMap<UpdateAppUserRequest, AppUser>()

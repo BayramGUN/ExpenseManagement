@@ -1,0 +1,32 @@
+@host=https://localhost:7066
+
+POST {{host}}/api/Authentications/SignIn
+Content-Type: application/json
+
+# {
+#  "userName": optional
+#  "identityNumber": optional
+#  "phone": optional
+#  "email": must
+#  "password": must
+# }
+
+{
+  "userName": "abuzer72", 
+  "password": "Abuzer!123",
+  "email": "abuzer@komurcu.com",
+  "identityNumber": "12312322441", 
+  "phone": "1231232233" 
+}
+
+# Response like below:
+#{
+#  "response": {
+#    "token": "eyJ.asd..",
+#    "email": "abuzer@komurcu.com"
+#  },
+#  "success": true,
+#  "message": "Success",
+#  "serverDate": "2024-01-18T00:29:44.8030844Z",
+#  "referenceNo": "f76c3553-d58b-4760-ae30-601de17827b9"
+#}

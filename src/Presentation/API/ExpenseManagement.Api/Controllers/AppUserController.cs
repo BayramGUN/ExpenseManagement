@@ -9,6 +9,7 @@ using ExpenseManagement.Schema.AppUser.Responses;
 using ExpenseManagement.Schema.Authentication.Requests;
 using ExpenseManagement.Schema.Authentication.Responses;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExpenseManagement.Api.Controllers;
@@ -54,6 +55,7 @@ public class AppUserController : ControllerBase
         return result;
     }
     
+    [Authorize(Roles = "Admin")]
     [HttpDelete(EndpointRoute.Delete)]
     public async Task<ApiResponse> DeleteAppUser([FromRoute] int id)
     {
@@ -61,6 +63,7 @@ public class AppUserController : ControllerBase
         var result = await mediator.Send(operation);
         return result;
     }
+
     [HttpPut(EndpointRoute.Update)]
     public async Task<ApiResponse> UpdateAppUser([FromBody] UpdateAppUserRequest request)
     {
@@ -68,6 +71,7 @@ public class AppUserController : ControllerBase
         var result = await mediator.Send(operation);
         return result;
     }
+
     [HttpPost(EndpointRoute.Create)]
     public async Task<ApiResponse<CreatedAppUserResponse>> SignUp([FromBody] CreateAppUserRequest request)
     {

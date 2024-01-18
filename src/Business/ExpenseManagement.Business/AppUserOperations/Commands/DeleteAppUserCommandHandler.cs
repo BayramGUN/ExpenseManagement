@@ -38,6 +38,6 @@ public class DeleteAppUserCommandHandler :
         if(userWillDelete is null)
             return new ApiResponse<string>(ExceptionMessages.NotFound(request.Id.ToString()));
         await appUserRepository.DeleteAppUserAsync(request.Id, cancellationToken);
-        return new ApiResponse();
+        return new ApiResponse<string>(SuccessMessages.DeletedSuccess(request.Id));
     }
 }

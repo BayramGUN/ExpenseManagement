@@ -1,0 +1,32 @@
+@host=https://localhost:7066
+@token=ey.JjLBw..
+
+GET {{host}}/api/AppUsers
+
+# Response like below:
+#{
+#  "response": [
+#    {
+#      "userName": "DefaultAdmin",
+#      "fullName": "Basri Bal",
+#      "email": "default@admin.com",
+#      "role": "Admin",
+#      "lastActivityDate": "0001-01-01T00:00:00",
+#      "passwordRetryCount": 0,
+#      "status": 0
+#    },
+#    {
+#      "userName": "DefaultEmployee",
+#      "fullName": "Hayri Petek",
+#      "email": "default@employee.com",
+#      "role": "Employee",
+#      "lastActivityDate": "0001-01-01T00:00:00",
+#      "passwordRetryCount": 0,
+#      "status": 0
+#    }
+#  ],
+#  "success": true,
+#  "message": "Success",
+#  "serverDate": "2024-01-18T00:28:28.8659534Z",
+#  "referenceNo": "412467d4-72b8-4215-ab9e-48a9f577fdbc"
+#}

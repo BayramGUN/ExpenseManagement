@@ -17,7 +17,7 @@ public interface IAppUserRepository
     /// </summary>
     /// <param name="entity">The AppUser entity to update.</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations.</param>
-    Task UpdateAppUserAsync(AppUser entity, CancellationToken cancellationToken);
+    Task<AppUser> UpdateAppUserAsync(AppUser entity, CancellationToken cancellationToken);
 
     /// <summary>
     /// Deletes an AppUser asynchronously from the repository based on the provided ID.

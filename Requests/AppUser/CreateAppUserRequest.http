@@ -1,0 +1,42 @@
+@host=https://localhost:7066
+@token=ey.JjLBw..
+
+POST {{host}}/api/AppUsers/Create
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+# userId: That is id value of the creater of user. 
+
+{
+  "accessToken": "string",
+  "userId": 1,
+  "requestTimestamp": "2024-01-18T00:32:27.029Z",
+  "userName": "string",
+  "iban": "TR240004233335524967892512",
+  "firstName": "string",
+  "lastName": "string",
+  "email": "string@str.com",
+  "identityNumber": "12812322445",
+  "phone": "1234445566"
+}
+
+
+#Success response be like:
+
+#{
+#  "response": {
+#    "userName": "string",
+#    "fullName": null,
+#    "email": "string@str.com",
+#    "role": "Employee",
+#    "lastActivityDate": "0001-01-01T00:00:00",
+#    "passwordRetryCount": 0,
+#    "status": 1,
+#    "temporaryPassword": "7N1stfFD"
+#  },
+#  "success": true,
+#  "message": "Success",
+#  "serverDate": "2024-01-18T00:33:56.5874524Z",
+#  "referenceNo": "4860e82b-8bdf-42a8-9e90-d32961937d1d"
+#}
+

@@ -76,12 +76,13 @@ public class AppUserRepository : IAppUserRepository
     /// </summary>
     /// <param name="appUser">The AppUser entity to update.</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations.</param>
-    public async Task UpdateAppUserAsync(
+    public async Task<AppUser> UpdateAppUserAsync(
         AppUser appUser, 
         CancellationToken cancellationToken)
     {
-        dbContext.Update(appUser);
+        var result = dbContext.Update(appUser);
         await dbContext.SaveChangesAsync();
+        return result.Entity;
     }
 
     /// <summary>

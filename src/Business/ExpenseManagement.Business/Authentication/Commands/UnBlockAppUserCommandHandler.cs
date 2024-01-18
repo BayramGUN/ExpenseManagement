@@ -83,7 +83,7 @@ public class UnBlockAppUserCommandHandler :
         appUser.LastActivityDate = DateTime.UtcNow;
         appUser.PasswordRetryCount = 0;
         appUser.Status = false;
-        appUser.Password = request.Model.Password.GetSHA256Hash();
+        appUser.Password = request.Model.NewPassword.GetSHA256Hash();
         await appUserRepository.UpdateAppUserAsync(appUser, cancellationToken);
 
         // Generate JWT token and return a success response.

@@ -1,0 +1,6 @@
+@host=https://localhost:7066
+@id=17
+@token=ey.JjLBw..
+
+DELETE {{host}}/api/AppUsers/Delete/{{id}}
+Authorization: Bearer {{token}}

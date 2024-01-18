@@ -1,0 +1,20 @@
+@host=https://localhost:7066
+@token=ey.JjLBw..
+
+POST {{host}}/api/AppUsers/Update
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+# userId: That is id value of the updater of user. 
+
+{
+  "accessToken": "str",
+  "userId": 0,
+  "requestTimestamp": "2024-01-17T23:34:26.923Z",
+  "userName": "abuzer72",
+  "id": 16,
+  "iban": "TR240006233335524967892512",
+  "email": "abuzer@komurcu.com",
+  "phone": "1231232233",
+}
+

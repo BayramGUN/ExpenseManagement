@@ -56,7 +56,9 @@ public class UpdateAppUserCommandHandler :
         userWillUpdate.IBAN = request.Model.IBAN ?? userWillUpdate.IBAN;
         userWillUpdate.Phone = request.Model.Phone ?? userWillUpdate.Phone;
         userWillUpdate.UserName = request.Model.UserName ?? userWillUpdate.UserName;
-        await appUserRepository.UpdateAppUserAsync(userWillUpdate, cancellationToken);
-        return new ApiResponse();
+
+        var result = await appUserRepository.UpdateAppUserAsync(userWillUpdate, cancellationToken);
+        
+        return new ApiResponse(SuccessMessages.UpdatedSuccess(result.UserName ?? result.Id.ToString()));
     }
 }

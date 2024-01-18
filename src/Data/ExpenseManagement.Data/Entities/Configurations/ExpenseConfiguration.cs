@@ -26,6 +26,7 @@ public class ExpenseConfiguration : IEntityTypeConfiguration<Expense>
         builder.Property(x => x.Status).IsRequired(true);
         builder.Property(x => x.IsActive).IsRequired(true);
         builder.Property(x => x.Description).IsRequired(false);
+        builder.Property(x => x.ReceiptPhotoUrl).IsRequired(true);
 
         builder.HasIndex(x => x.AppUserId);
 

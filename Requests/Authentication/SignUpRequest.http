@@ -1,6 +1,6 @@
 @host=https://localhost:7066
 
-POST {{host}}/api/Authentication
+POST {{host}}/api/Authentications/SignUp
 Content-Type: application/json
 
 {
@@ -14,3 +14,15 @@ Content-Type: application/json
   "phone": "1231232233",
   "role": "Admin"
 }
+
+# Response like below:
+#{
+#  "response": {
+#    "token": "eyJ.asd..",
+#    "email": "abuzer@komurcu.com"
+#  },
+#  "success": true,
+#  "message": "Success",
+#  "serverDate": "2024-01-18T00:29:44.8030844Z",
+#  "referenceNo": "f76c3553-d58b-4760-ae30-601de17827b9"
+#}
