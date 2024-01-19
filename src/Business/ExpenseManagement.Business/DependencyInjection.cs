@@ -7,6 +7,8 @@ using ExpenseManagement.Business.Common.Implementation.Token;
 using ExpenseManagement.Business.Common.Interfaces.EventBus;
 using ExpenseManagement.Business.Common.Interfaces.Token;
 using ExpenseManagement.Business.Configurations.Mapper;
+using ExpenseManagement.Business.ExpenseCqrs.Events;
+using ExpenseManagement.Data.Entities;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -106,10 +108,11 @@ public static class DependencyInjection
         ConfigurationManager configuration)
     {
         services.Configure<MessageBrokerSettings>(
-            configuration.GetSection(MessageBrokerSettings.SectionName)
-        );
+            configuration.GetSection(MessageBrokerSettings.SectionName));
+
         services.AddSingleton(serviceProvider => 
             serviceProvider.GetRequiredService<IOptions<MessageBrokerSettings>>().Value);
+        
         services.AddMassTransit(busConfigurator => 
         {
             busConfigurator.SetKebabCaseEndpointNameFormatter();
@@ -117,10 +120,15 @@ public static class DependencyInjection
             {
                 MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
 
-                configurator.Host(settings.Host, "/", h => 
+                configurator.Host(settings.Host, settings.VirtualHost, h => 
                 {
                     h.Username(settings.UserName);
                     h.Password(settings.Password);
+                });
+                configurator.ReceiveEndpoint("temp-queue", c => {
+                    c.Handler<PaymentEvent>(ctx => {
+                        return Console.Out.WriteAsync($"{ctx.Message.Amount}");
+                    });
                 });
             });
         });

@@ -55,12 +55,29 @@ public class ExpenseController : ControllerBase
         var result = await mediator.Send(operation);
         return result;
     }
+    
+    [Authorize(Roles = RoleStrings.Both)]
+    [HttpDelete(EndpointRoute.Delete)]
+    public async Task<ApiResponse> DeleteExpense([FromRoute] int id)
+    {
+        var operation = new DeleteExpenseCommand(id);
+        var result = await mediator.Send(operation);
+        return result;
+    }
 
    // [Authorize(Roles = RoleStrings.AdminRole)]
-    [HttpPut(EndpointRoute.Approve)]
+    [HttpPatch(EndpointRoute.Approve)]
     public async Task<ApiResponse> ApproveExpense([FromBody] ApproveExpenseRequest request)
     {
         var operation = new ApproveExpenseCommand(request);
+        var result = await mediator.Send(operation);
+        return result;
+    }
+
+    [HttpPut(EndpointRoute.Update)]
+    public async Task<ApiResponse> UpdateExpense([FromBody] UpdateExpenseRequest request)
+    {
+        var operation = new UpdateExpenseCommand(request);
         var result = await mediator.Send(operation);
         return result;
     }

@@ -77,7 +77,6 @@ public class SignInCommandHandler :
         appUser.PasswordRetryCount = 0;
         appUser.Status = false;
         await appUserRepository.UpdateAppUserAsync(appUser, cancellationToken);
-
         // Generate JWT token and return a success response.
         string token = tokenGenerator.GenerateToken(appUser);
         return new ApiResponse<TokenResponse>(new TokenResponse
