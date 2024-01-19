@@ -17,7 +17,7 @@ public static class DbSeedOperations
     /// <param name="dbContext">The DbContext for the ExpenseManagement database.</param>
     /// <param name="configuration">The configuration containing necessary settings.</param>
     public static void SeedDatabase(
-        ExpenseManagementDbContext dbContext, 
+        EfExpenseManagementDbContext dbContext, 
         ConfigurationManager configuration)
     {
         SeedUserIfNotExist(dbContext, configuration);
@@ -29,7 +29,7 @@ public static class DbSeedOperations
     /// <param name="dbContext">The DbContext for the ExpenseManagement database.</param>
     /// <param name="configuration">The configuration containing necessary settings.</param>
     private static void SeedUserIfNotExist(
-        ExpenseManagementDbContext dbContext, 
+        EfExpenseManagementDbContext dbContext, 
         IConfiguration configuration)
     {
         if(!dbContext.AppUsers!.Any())

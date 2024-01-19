@@ -3,9 +3,8 @@ using MediatR;
 using ExpenseManagement.Base.Constants.Messages;
 using ExpenseManagement.Base.Response;
 using ExpenseManagement.Schema.Authentication.Responses;
-using ExpenseManagement.Base.Extensions.Encryption;
 using ExpenseManagement.Data.Repositories.Interfaces.AppUsers;
-using ExpenseManagement.Business.Common;
+using ExpenseManagement.Business.Common.Interfaces.Token;
 
 namespace ExpenseManagement.Business.Authentication.Commands.SignUp;
 
@@ -17,7 +16,7 @@ public class SignUpCommandHandler :
     IRequestHandler<SignUpCommand, ApiResponse<TokenResponse>>
 {
     private readonly IMapper mapper;
-    private readonly IAppUserRepository appUserRepository;
+    private readonly IEfAppUserRepository appUserRepository;
     private readonly IJwtTokenGenerator tokenGenerator;
 
     /// <summary>
@@ -28,7 +27,7 @@ public class SignUpCommandHandler :
     /// <param name="tokenGenerator">The JWT token generator for creating authentication tokens.</param>
     public SignUpCommandHandler(
         IMapper mapper,
-        IAppUserRepository appUserRepository,
+        IEfAppUserRepository appUserRepository,
         IJwtTokenGenerator tokenGenerator)
     {
         this.mapper = mapper;

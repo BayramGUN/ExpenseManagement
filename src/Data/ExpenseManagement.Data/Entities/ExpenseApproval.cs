@@ -10,6 +10,7 @@ public class ExpenseApproval : BaseEntityWithId
     public virtual int ExpenseId { get; set; }
     public virtual AppUser? Approver { get; set; }
     public virtual int ApproverId { get; set; }
+    public string? Description { get; set; }
 
     public Status ApprovalStatus { get; set; }
 }

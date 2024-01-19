@@ -2,7 +2,7 @@ using AutoMapper;
 using ExpenseManagement.Base.Constants.Messages;
 using ExpenseManagement.Base.Extensions.Encryption;
 using ExpenseManagement.Base.Response;
-using ExpenseManagement.Business.Common;
+using ExpenseManagement.Business.Common.Interfaces.Token;
 using ExpenseManagement.Data.Repositories.Interfaces.AppUsers;
 using ExpenseManagement.Schema.Authentication.Responses;
 using MediatR;
@@ -16,7 +16,7 @@ public class UnBlockAppUserCommandHandler :
     IRequestHandler<UnBlockAppUserCommand, ApiResponse<TokenResponse>>
 {
     private readonly IMapper mapper;
-    private readonly IAppUserRepository appUserRepository;
+    private readonly IEfAppUserRepository appUserRepository;
     private readonly IJwtTokenGenerator tokenGenerator;
 
     /// <summary>
@@ -27,7 +27,7 @@ public class UnBlockAppUserCommandHandler :
     /// <param name="tokenGenerator">The JWT token generator service.</param>
     public UnBlockAppUserCommandHandler(
         IMapper mapper,
-        IAppUserRepository appUserRepository,
+        IEfAppUserRepository appUserRepository,
         IJwtTokenGenerator tokenGenerator)
     {
         this.mapper = mapper;

@@ -9,6 +9,5 @@ public class Payment : BaseEntityWithId
     public DateTime PaymentDate { get; set; }
     public required string PaymentMethod { get; set; }
     public decimal Amount { get; set; }
-
     public virtual Expense? Expense { get; set; }
 }

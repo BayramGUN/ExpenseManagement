@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  payment-mq:
+    image: rabbitmq:3.11.7-management
+    container_name: Queue
+    hostname: expense-queue
+    volumes:
+      - ./.containers/queue/data/:/var/lib/rabbitmq
+      - ./.containers/queue/log/:/var/log/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest

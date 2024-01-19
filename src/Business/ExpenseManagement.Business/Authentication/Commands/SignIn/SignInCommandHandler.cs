@@ -2,7 +2,7 @@ using AutoMapper;
 using ExpenseManagement.Base.Constants.Messages;
 using ExpenseManagement.Base.Extensions.Encryption;
 using ExpenseManagement.Base.Response;
-using ExpenseManagement.Business.Common;
+using ExpenseManagement.Business.Common.Interfaces.Token;
 using ExpenseManagement.Data.Repositories.Interfaces.AppUsers;
 using ExpenseManagement.Schema.Authentication.Responses;
 using MediatR;
@@ -15,8 +15,7 @@ namespace ExpenseManagement.Business.Authentication.Commands.SignIn;
 public class SignInCommandHandler : 
     IRequestHandler<SignInCommand, ApiResponse<TokenResponse>>
 {
-    private readonly IMapper mapper;
-    private readonly IAppUserRepository appUserRepository;
+    private readonly IEfAppUserRepository appUserRepository;
     private readonly IJwtTokenGenerator tokenGenerator;
 
     /// <summary>
@@ -26,11 +25,9 @@ public class SignInCommandHandler :
     /// <param name="appUserRepository">The repository for AppUser entities.</param>
     /// <param name="tokenGenerator">The JWT token generator service.</param>
     public SignInCommandHandler(
-        IMapper mapper,
-        IAppUserRepository appUserRepository,
+        IEfAppUserRepository appUserRepository,
         IJwtTokenGenerator tokenGenerator)
     {
-        this.mapper = mapper;
         this.appUserRepository = appUserRepository;
         this.tokenGenerator = tokenGenerator;
     }

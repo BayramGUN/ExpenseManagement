@@ -9,6 +9,7 @@ public class Expense : BaseEntityWithId
     public virtual AppUser AppUser { get; set; } = null!;
 
     public decimal Amount { get; set; }
+    public string Title { get; set; } = null!;
     public DateTime ExpensedDate { get; set; }
     public string? Description { get; set; }
     public Status Status { get ; set; }

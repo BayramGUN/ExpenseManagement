@@ -21,6 +21,7 @@ public class ExpenseApprovalConfiguration : IEntityTypeConfiguration<ExpenseAppr
         builder.Property(x => x.UpdateUserId).IsRequired(false);
         builder.Property(x => x.IsActive).IsRequired(true).HasDefaultValue(true);
 
+        builder.Property(x => x.Description).IsRequired(false);
         builder.Property(x => x.ApprovalStatus).IsRequired(true);
         builder.Property(x => x.IsActive).IsRequired(true);
 

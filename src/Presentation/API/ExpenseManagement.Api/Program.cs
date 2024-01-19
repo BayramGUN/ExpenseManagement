@@ -32,7 +32,7 @@ if (app.Environment.IsDevelopment())
 
 using var scope = app.Services.CreateScope();
 var services = scope.ServiceProvider;
-var context = services.GetRequiredService<ExpenseManagementDbContext>();
+var context = services.GetRequiredService<EfExpenseManagementDbContext>();
 context.Database.EnsureCreated();
 
 DbSeedOperations.SeedDatabase(context, builder.Configuration);

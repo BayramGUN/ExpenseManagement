@@ -1,8 +1,8 @@
 using ExpenseManagement.Base.Constants.Authorization;
 using ExpenseManagement.Base.Response;
 using ExpenseManagement.Base.Routes;
-using ExpenseManagement.Business.AppUserOperations.Commands;
-using ExpenseManagement.Business.AppUserOperations.Queries;
+using ExpenseManagement.Business.AppUserCqrs.Commands;
+using ExpenseManagement.Business.AppUserCqrs.Queries;
 using ExpenseManagement.Schema.AppUser.Requests;
 using ExpenseManagement.Schema.AppUser.Responses;
 using MediatR;
@@ -17,7 +17,7 @@ namespace ExpenseManagement.Api.Controllers;
 [ApiController]
 public class AppUserController : ControllerBase
 {  
-   private readonly IMediator mediator;
+    private readonly IMediator mediator;
 
     public AppUserController(IMediator mediator)
     {
@@ -41,7 +41,7 @@ public class AppUserController : ControllerBase
         return result;
     }
     
-    [HttpGet(EndpointRoute.GetAppUsersBy)]
+    [HttpGet(EndpointRoute.GetBy)]
     public async Task<ApiResponse<List<AppUserResponse>>> GetUsersByAnyParameter(
         [FromQuery] GetUsersByParameterRequest request)
     {

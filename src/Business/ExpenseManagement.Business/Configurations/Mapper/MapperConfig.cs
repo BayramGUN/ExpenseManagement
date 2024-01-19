@@ -5,8 +5,9 @@ using ExpenseManagement.Business.Configurations.Extensions;
 using ExpenseManagement.Schema.AppUser.Responses;
 using ExpenseManagement.Schema.AppUser.Requests;
 using ExpenseManagement.Schema.Authentication.Requests;
-using System.ComponentModel.DataAnnotations;
-using Microsoft.IdentityModel.Tokens;
+using ExpenseManagement.Schema.Expense.Responses;
+using ExpenseManagement.Data.Entities;
+using ExpenseManagement.Schema.Expense.Requests;
 
 namespace ExpenseManagement.Business.Configurations.Mapper;
 
@@ -30,6 +31,8 @@ public class MapperConfig : Profile
 
         // Map CreateAppUserRequest to AppUser, specifying custom mappings
         CreateMap<CreateAppUserRequest, AppUser>()
+            .ForMember(dest => dest.Role,
+                opt => opt.MapFrom(src => src.Role.ParseUserRole()))
             .ForMember(dest => dest.InsertUserId,
                 opt => opt.MapFrom(src => src.UserId))
             .ForMember(dest => dest.InsertDate,
@@ -51,9 +54,42 @@ public class MapperConfig : Profile
             .ForMember(dest => dest.UpdateUserId,
                 opt => opt.MapFrom(src => src.UserId));
 
-        // Map UpdateAppUserRequest to AppUser, specifying custom mappings
+        // Map AppUser to AppUserResponse, specifying custom mappings
         CreateMap<AppUser, AppUserResponse>()
             .ForMember(dest => dest.FullName,
                 opt => opt.MapFrom(src => AppUserMappingStrings.AppUserFullName(src.FirstName, src.LastName)));
+
+        // Map Expense to ExpenseResponse, specifying custom mappings
+        CreateMap<Expense, ExpenseResponse>()
+            .ForMember(x => x.Status,
+                opt => opt.MapFrom(src => src.Status))
+            .ForMember(dest => dest.EmployeeName,
+                opt => opt.MapFrom(
+                    src => AppUserMappingStrings.AppUserFullName(src.AppUser.FirstName, src.AppUser.LastName)));   
+
+        // Map CreateExpenseRequest to Expense, specifying custom mappings
+        CreateMap<CreateExpenseRequest, Expense>()
+            .ForMember(dest => dest.AppUserId,
+                opt => opt.MapFrom(src => src.UserId))
+            .ForMember(dest => dest.InsertDate,
+                opt => opt.MapFrom(src => src.RequestTimestamp))
+            .ForMember(dest => dest.ExpensedDate,
+                opt => opt.MapFrom(src => src.RequestTimestamp))
+            .ForMember(dest => dest.InsertUserId,
+                opt => opt.MapFrom(src => src.UserId));   
+
+        // Map ApproveExpenseRequest to ExpenseApproval, specifying custom mappings
+        CreateMap<ApproveExpenseRequest, ExpenseApproval>()
+            .ForMember(dest => dest.InsertUserId,
+                opt => opt.MapFrom(src => src.UserId))
+            .ForMember(dest => dest.ApproverId,
+                opt => opt.MapFrom(src => src.UserId))
+            .ForMember(dest => dest.Description,
+                opt => opt.MapFrom(src => src.Description))
+            .ForMember(dest => dest.InsertDate,
+                opt => opt.MapFrom(src => src.RequestTimestamp))
+            .ForMember(dest => dest.ApprovalStatus,
+                opt => opt.MapFrom(src => src.Status));
+  
     }
 }

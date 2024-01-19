@@ -1,11 +1,13 @@
-using System.Reflection;
 using System.Text;
 using AutoMapper;
+using ExpenseManagement.Base.MessageBroker;
 using ExpenseManagement.Base.Token;
-using ExpenseManagement.Business.Authentication;
-using ExpenseManagement.Business.Common;
+using ExpenseManagement.Business.Common.Implementation.EventBus;
+using ExpenseManagement.Business.Common.Implementation.Token;
+using ExpenseManagement.Business.Common.Interfaces.EventBus;
+using ExpenseManagement.Business.Common.Interfaces.Token;
 using ExpenseManagement.Business.Configurations.Mapper;
-using FluentValidation;
+using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
@@ -41,7 +43,12 @@ public static class DependencyInjection
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly()); */
 
         // Add authentication-related services
-        services.AddAuthentication(configuration);
+        // Add messageBroker-related services
+        services.AddAuthentication(configuration)
+                .AddMessageBroker(configuration);
+
+        // Add EventBus dependency as transient.
+        services.AddTransient<IEventBus, EventBus>();
 
         return services;
     }
@@ -85,6 +92,38 @@ public static class DependencyInjection
                     };
                 });
     
+        return services;
+    }
+
+    /// <summary>
+    /// Adds authentication-related services to the IServiceCollection.
+    /// </summary>
+    /// <param name="services">The IServiceCollection to which services are added.</param>
+    /// <param name="configuration">The configuration manager for accessing configuration settings.</param>
+    /// <returns>The updated IServiceCollection.</returns>
+    public static IServiceCollection AddMessageBroker(
+        this IServiceCollection services, 
+        ConfigurationManager configuration)
+    {
+        services.Configure<MessageBrokerSettings>(
+            configuration.GetSection(MessageBrokerSettings.SectionName)
+        );
+        services.AddSingleton(serviceProvider => 
+            serviceProvider.GetRequiredService<IOptions<MessageBrokerSettings>>().Value);
+        services.AddMassTransit(busConfigurator => 
+        {
+            busConfigurator.SetKebabCaseEndpointNameFormatter();
+            busConfigurator.UsingRabbitMq((context, configurator) => 
+            {
+                MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
+
+                configurator.Host(settings.Host, "/", h => 
+                {
+                    h.Username(settings.UserName);
+                    h.Password(settings.Password);
+                });
+            });
+        });
         return services;
     }
 }

@@ -6,6 +6,7 @@ namespace ExpenseManagement.Schema.AppUser.Requests;
 public class CreateAppUserRequest : BaseRequest
 {
     public string? UserName { get; set; }
+    public string Role { get; set; } = null!;
     public string IBAN { get; set; } = null!;
     public string FirstName { get; set; } = null!;
     public string LastName { get; set; } = null!;
