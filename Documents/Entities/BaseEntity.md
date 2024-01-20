@@ -1,7 +1,5 @@
 # Entity Model
 
-> [Back to README.md](../../README.md)
-
 - [Base Entity Model](#base-entity)
 
 ## Base Entity
@@ -30,3 +28,5 @@ public abstract class BaseEntity
     public bool? IsActive { get; set; }
 }
 ```
+
+> [Back to README.md](../../README.md#entities)

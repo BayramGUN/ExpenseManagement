@@ -1,7 +1,5 @@
 # Entity Model
 
-> [Back to README.md](../../README.md)
-
 - [Expense Entity Model](#expense-entity)
 
 ## Expense Entity
@@ -28,3 +26,5 @@ public class Expense : BaseEntityWithId
     public virtual Payment? Payment { get; set; }
 }
 ```
+
+> [Back to README.md](../../README.md#entities)

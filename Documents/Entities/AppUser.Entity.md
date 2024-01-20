@@ -1,7 +1,5 @@
 # Entity Model
 
-> [Back to README.md](../../README.md)
-
 - [AppUser Entity Model](#appuser-entity)
 
 ## AppUser Entity
@@ -28,3 +26,5 @@ public class AppUser : BaseEntityWithId
     public virtual List<Expense>? Expenses { get; set; }
 }
 ```
+
+> [Back to README.md](../../README.md#entities)

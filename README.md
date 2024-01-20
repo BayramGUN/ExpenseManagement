@@ -35,6 +35,8 @@ cd src/Presentation/API/ExpenseManagement.Api; dotnet user-secrets list
 
 ### Documents of The Project
 
+#### API
+
 - [Api](/Documents/Api/)
   - [Authentication](/Documents/Api/Authentication.Api.md)
     - [SingUp](/Documents/Api/Authentication.Api.md#signup)
@@ -43,8 +45,33 @@ cd src/Presentation/API/ExpenseManagement.Api; dotnet user-secrets list
     - [SingIn](/Documents/Api/Authentication.Api.md#signin)
       - [SingIn Request](/Documents/Api/Authentication.Api.md#signin-request)
       - [SingIn Response](/Documents/Api/Authentication.Api.md#signin-response)
+  - [Expenses](/Documents/Api/Expenses.Api.md#expenses)
+    - [GetAllExpenses](/Documents/Api/Expenses.Api.md#getallexpenses)
+      - [GetAllExpenses Request](/Documents/Api/Expenses.Api.md#getallexpenses-request)
+      - [GetAllExpenses Response](/Documents/Api/Expenses.Api.md#getallexpenses-response)
+    - [GetExpenseById](/Documents/Api/Expenses.Api.md#getexpensebyid)
+      - [GetExpenseById Request](/Documents/Api/Expenses.Api.md#getexpensebyid-request)
+      - [GetExpenseById Response](/Documents/Api/Expenses.Api.md#getexpensebyid-response)
+    - [GetExpenseBy](/Documents/Api/Expenses.Api.md#getexpenseby)
+      - [GetExpenseBy Request](/Documents/Api/Expenses.Api.md#getexpenseby-request)
+      - [GetExpenseBy Response](/Documents/Api/Expenses.Api.md#getexpenseby-response)
+    - [GetExpenseByAppUser](/Documents/Api/Expenses.Api.md#getexpensebyappuser)
+      - [GetExpenseByAppUser Request](/Documents/Api/Expenses.Api.md#getexpensebyappuser-request)
+      - [GetExpenseByAppUser Response](/Documents/Api/Expenses.Api.md#getexpensebyappuser-response)
+    - [GetExpenseByAppUser](/Documents/Api/Expenses.Api.md#getexpensebyappuser)
+      - [GetExpenseByAppUser Request](/Documents/Api/Expenses.Api.md#getexpensebyappuser-request)
+      - [GetExpenseByAppUser Response](/Documents/Api/Expenses.Api.md#getexpensebyappuser-response)
+    - [CreateExpense](/Documents/Api/Expenses.Api.md#createexpense)
+      - [CreateExpense Request](/Documents/Api/Expenses.Api.md#createexpense-request)
+      - [CreateExpense Response](/Documents/Api/Expenses.Api.md#createexpense-response)
+    - [UpdateExpense](/Documents/Api/Expenses.Api.md#updateexpense)
+      - [UpdateExpense Request](/Documents/Api/Expenses.Api.md#updateexpense-request)
+      - [UpdateExpense Response](/Documents/Api/Expenses.Api.md#updateexpense-response)
+    - [ApproveExpense](/Documents/Api/Expenses.Api.md#approveexpense)
+      - [ApproveExpense Request](/Documents/Api/Expenses.Api.md#approveexpense-request)
+      - [ApproveExpense Response](/Documents/Api/Expenses.Api.md#approveexpense-response)
 
-### Entities
+#### Entities
 
 - [Entities](/Documents/Entities/)
   - [BaseEntity Model](/Documents/Entities/BaseEntity.md)

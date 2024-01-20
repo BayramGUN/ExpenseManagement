@@ -1,7 +1,5 @@
 # Entity Model
 
-> [Back to README.md](../../README.md)
-
 - [ExpenseApproval Entity Model](#expenseapproval-entity)
 
 ## ExpenseApproval Entity
@@ -24,3 +22,5 @@ public class ExpenseApproval : BaseEntityWithId
     public Status ApprovalStatus { get; set; }
 }
 ```
+
+> [Back to README.md](../../README.md#entities)
