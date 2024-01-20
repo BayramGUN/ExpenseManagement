@@ -3,6 +3,5 @@
 
 @id=2
 
-
 GET {{host}}/api/AppUsers/GetAppUserBy?Id={{id}}
-#Authorization: Bearer {{token}}
+Authorization: Bearer {{token}}

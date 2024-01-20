@@ -23,6 +23,9 @@
     - [ApproveExpense](#approveexpense)
       - [ApproveExpense Request](#approveexpense-request)
       - [ApproveExpense Response](#approveexpense-response)
+    - [DeleteExpense](#deleteexpense)
+      - [DeleteExpense Request](#deleteexpense-request)
+      - [DeleteExpense Response](#deleteexpense-response)
 
 ## Expenses
 
@@ -301,4 +304,30 @@ Authorization: Bearer {{token}}
 ```
 
 > Go to [HTTP](/Requests/Expense/ApproveExpenseRequest.http) file.
+
+### DeleteExpense
+
+#### DeleteExpense Request
+
+```http
+@host=https://localhost:7066
+@id=1
+@token=ey.JjLBw..
+
+DELETE {{host}}/api/Expenses/Delete/{{id}}
+Authorization: Bearer {{token}}
+```
+
+#### DeleteExpense Response
+
+```json
+{
+  "success": true,
+  "message": "1 is deleted successfully!",
+  "serverDate": "2024-01-19T23:23:12.964Z",
+  "referenceNo": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+}
+```
+
+> Go to [HTTP](/Requests/Expense/DeleteExpenseRequest.http) file.
 > Back to [README.md](../../README.md) file.

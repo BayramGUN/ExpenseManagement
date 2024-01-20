@@ -14,4 +14,4 @@
 
 
 GET {{host}}/api/AppUsers/GetAppUserBy?Id={{id}}&Email={{email}}&Phone={{phone}}&UserName={{userName}}&IdentityNumber={{identityNumber}}
-#Authorization: Bearer {{token}}
+Authorization: Bearer {{token}}
