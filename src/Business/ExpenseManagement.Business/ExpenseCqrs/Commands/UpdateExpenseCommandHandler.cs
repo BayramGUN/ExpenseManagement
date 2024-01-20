@@ -3,11 +3,6 @@ using MediatR;
 using ExpenseManagement.Base.Constants.Messages;
 using ExpenseManagement.Base.Response;
 using ExpenseManagement.Data.Repositories.Interfaces.Expenses;
-using ExpenseManagement.Business.Common;
-using ExpenseManagement.Base.Enums;
-using ExpenseManagement.Base.Constants.Authentication;
-using System.Text;
-using ExpenseManagement.Data.Entities;
 
 namespace ExpenseManagement.Business.ExpenseCqrs.Commands;
 /// Handles the command for user Update user from admin, mapping the request to an Expense entity,
@@ -45,7 +40,7 @@ public class UpdateExpenseCommandHandler :
         CancellationToken cancellationToken)
     {
 
-        var entityWillUpdate = await expenseRepository.GetExpenseById(request.Model.Id, cancellationToken);
+        var entityWillUpdate = await expenseRepository.GetExpenseByIdAsync(request.Model.Id, cancellationToken);
         if(entityWillUpdate is null)
             return new ApiResponse(ExceptionMessages.ExpenseHasNotUniqueId);
 
@@ -53,6 +48,8 @@ public class UpdateExpenseCommandHandler :
         entityWillUpdate.Description = request.Model.Description ?? entityWillUpdate.Description;
         entityWillUpdate.Title = request.Model.Title ?? entityWillUpdate.Title;
         entityWillUpdate.ReceiptPhotoUrl = request.Model.ReceiptPhotoUrl ?? entityWillUpdate.ReceiptPhotoUrl;
+        entityWillUpdate.UpdateUserId = request.Model.UserId;
+        entityWillUpdate.UpdateDate = request.Model.RequestTimestamp;
         
         await expenseRepository.UpdateExpenseAsync(entityWillUpdate, cancellationToken);
         return new ApiResponse(SuccessMessages.UpdatedSuccess(entityWillUpdate.Id.ToString()));

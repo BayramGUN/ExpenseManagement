@@ -35,7 +35,7 @@ public interface IEfExpenseRepository
     /// <param name="id">The ID of the Expense to retrieve (optional).</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations (optional).</param>
     /// <returns>The retrieved Expense.</returns>
-    Task<Expense> GetExpenseById(int id, CancellationToken cancellationToken);
+    Task<Expense> GetExpenseByIdAsync(int id, CancellationToken cancellationToken);
 
     /// <summary>
     /// Retrieves an Expense from the repository based on the specified parameters.
@@ -43,7 +43,9 @@ public interface IEfExpenseRepository
     /// <param name="appUserId">The appUserId of the Expense to retrieve (optional).</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations (optional).</param>
     /// <returns>The retrieved Expense.</returns>
-    Task<List<Expense>> GetExpenseByAppUserId(int appUserId, CancellationToken cancellationToken);
+    Task<List<Expense>> GetExpenseByAppUserIdAsync(
+        int appUserId, 
+        CancellationToken cancellationToken);
 
     ///<summary>
     /// Get all Expenses from dbContext.
@@ -58,7 +60,7 @@ public interface IEfExpenseRepository
     /// <param name="amount">Optional parameter for filtering by expense amount.</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations.</param>
     /// <returns>A list of filtered expenses.</returns>
-    Task<List<Expense>> FilterExpensesByParameter(
+    Task<List<Expense>> FilterExpensesByParameterAsync(
             Status? status = null,
             DateTime? expensedDate = null,
             decimal? amount = null,

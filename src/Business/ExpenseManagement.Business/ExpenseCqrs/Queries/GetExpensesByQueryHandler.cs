@@ -40,7 +40,7 @@ public class GetExpensesByQueryHandler :
         CancellationToken cancellationToken)
     {
         // Retrieve expenses based on the provided parameters.
-        var expenses = await expenseRepository.FilterExpensesByParameter(
+        var expenses = await expenseRepository.FilterExpensesByParameterAsync(
             status: request.Model.Status,
             expensedDate: request.Model.ExpensedDate,
             amount: request.Model.Amount,

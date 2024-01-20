@@ -1,5 +1,4 @@
 using ExpenseManagement.Base.Enums;
-using ExpenseManagement.Base.Schema;
 
 namespace ExpenseManagement.Schema.Expense.Requests;
 

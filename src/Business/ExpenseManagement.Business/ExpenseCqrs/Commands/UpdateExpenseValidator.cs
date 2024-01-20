@@ -31,5 +31,9 @@ public class UpdateExpenseValidator : AbstractValidator<UpdateExpenseRequest>
         RuleFor(x => x.UserId).NotNull().NotEmpty()
             .GreaterThan(0)
             .LessThanOrEqualTo(int.MaxValue);
+            
+        RuleFor(x => x.Id).NotNull().NotEmpty()
+            .GreaterThan(0)
+            .LessThanOrEqualTo(int.MaxValue);
     }
 }

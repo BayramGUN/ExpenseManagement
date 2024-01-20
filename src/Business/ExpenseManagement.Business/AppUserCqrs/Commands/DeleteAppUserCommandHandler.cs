@@ -34,7 +34,7 @@ public class DeleteAppUserCommandHandler :
         DeleteAppUserCommand request,
         CancellationToken cancellationToken)
     {
-        var userWillDelete = appUserRepository.GetAppUserByParameter(id: request.Id);
+        var userWillDelete = appUserRepository.GetAppUserByParameterAsync(id: request.Id);
         if(userWillDelete is null)
             return new ApiResponse<string>(ExceptionMessages.NotFound(request.Id));
         await appUserRepository.DeleteAppUserAsync(request.Id, cancellationToken);

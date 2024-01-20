@@ -35,7 +35,7 @@ public interface IEfExpenseApprovalRepository
     /// <param name="id">The ID of the ExpenseApproval to retrieve (optional).</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations (optional).</param>
     /// <returns>The retrieved ExpenseApproval.</returns>
-    Task<ExpenseApproval> GetExpenseApprovalById(int id, CancellationToken cancellationToken);
+    Task<ExpenseApproval> GetExpenseApprovalByIdAsync(int id, CancellationToken cancellationToken);
 
     ///<summary>
     /// Get all ExpenseApprovals from dbContext.
@@ -49,7 +49,7 @@ public interface IEfExpenseApprovalRepository
     /// <param name="approverId">The approverId of the ExpenseApproval to retrieve (optional).</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations (optional).</param>
     /// <returns>The retrieved ExpenseApproval.</returns>
-    Task<List<ExpenseApproval>> FilterExpenseApprovalsByParameter(
+    Task<List<ExpenseApproval>> FilterExpenseApprovalsByParameterAsync(
             Status? status = null,
             int? approverId = null!,
             CancellationToken? cancellationToken = null

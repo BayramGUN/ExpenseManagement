@@ -41,7 +41,7 @@ public class UpdateAppUserCommandHandler :
         CancellationToken cancellationToken)
     {
         // Retrieve the AppUser based on the provided parameters.
-        var userWillUpdate = await appUserRepository.GetAppUserByParameter(
+        var userWillUpdate = await appUserRepository.GetAppUserByParameterAsync(
             id: request.Model.Id,
             userName: request.Model.UserName,
             email: request.Model.Email,
@@ -56,7 +56,9 @@ public class UpdateAppUserCommandHandler :
         userWillUpdate.IBAN = request.Model.IBAN ?? userWillUpdate.IBAN;
         userWillUpdate.Phone = request.Model.Phone ?? userWillUpdate.Phone;
         userWillUpdate.UserName = request.Model.UserName ?? userWillUpdate.UserName;
-
+        userWillUpdate.UpdateDate = request.Model.RequestTimestamp;
+        userWillUpdate.UpdateUserId = request.Model.UserId;
+        
         var result = await appUserRepository.UpdateAppUserAsync(userWillUpdate, cancellationToken);
         
         return new ApiResponse(SuccessMessages.UpdatedSuccess(result.UserName ?? result.Id.ToString()));

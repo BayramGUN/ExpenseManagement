@@ -40,7 +40,7 @@ public class GetUserByQueryHandler :
         CancellationToken cancellationToken)
     {
         // Retrieve the AppUser based on the provided parameters.
-        var appUser = await appUserRepository.GetAppUserByParameter(
+        var appUser = await appUserRepository.GetAppUserByParameterAsync(
             id: request.Model.Id,
             userName: request.Model.UserName,
             email: request.Model.Email,

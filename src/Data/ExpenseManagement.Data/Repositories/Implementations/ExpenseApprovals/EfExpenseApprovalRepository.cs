@@ -28,15 +28,6 @@ public class EfExpenseApprovalRepository : IEfExpenseApprovalRepository
     public async Task<List<ExpenseApproval>> GetAllExpenseApprovalsAsync(CancellationToken cancellationToken) =>
         await dbContext.Set<ExpenseApproval>()
                        .Include(x => x.Approver)
-                       .ThenInclude(a => a!.FirstName)
-                       .Include(x => x.Approver)
-                       .ThenInclude(a => a!.LastName)
-                       .Include(x => x.Approver)
-                       .ThenInclude(a => a!.IBAN)
-                       .Include(x => x.Approver)
-                       .ThenInclude(a => a!.Id)
-                       .Include(x => x.Approver)
-                       .ThenInclude(a => a!.IdentityNumber)
                        .Include(x => x.Expense)
                        .ToListAsync(cancellationToken);
     /// <summary>
@@ -60,18 +51,11 @@ public class EfExpenseApprovalRepository : IEfExpenseApprovalRepository
     /// <param name="id">The ID of the ExpenseApproval to retrieve.</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations.</param>
     /// <returns>The retrieved ExpenseApproval.</returns>
-    public async Task<ExpenseApproval> GetExpenseApprovalById(int id, CancellationToken cancellationToken) =>
+    public async Task<ExpenseApproval> GetExpenseApprovalByIdAsync(
+            int id, 
+            CancellationToken cancellationToken) =>
         await dbContext.Set<ExpenseApproval>()
                        .Include(x => x.Approver)
-                       .ThenInclude(a => a!.FirstName)
-                       .Include(x => x.Approver)
-                       .ThenInclude(a => a!.LastName)
-                       .Include(x => x.Approver)
-                       .ThenInclude(a => a!.IBAN)
-                       .Include(x => x.Approver)
-                       .ThenInclude(a => a!.Id)
-                       .Include(x => x.Approver)
-                       .ThenInclude(a => a!.IdentityNumber)
                        .Include(x => x.Expense)
                        .Where(x => x.Id == id)
                        .FirstOrDefaultAsync((CancellationToken)cancellationToken!) ?? default!;
@@ -118,22 +102,13 @@ public class EfExpenseApprovalRepository : IEfExpenseApprovalRepository
     /// <param name="approverId">Optional parameter for filtering by approver ID.</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations.</param>
     /// <returns>A list of filtered ExpenseApprovals.</returns>
-    public async Task<List<ExpenseApproval>> FilterExpenseApprovalsByParameter(
+    public async Task<List<ExpenseApproval>> FilterExpenseApprovalsByParameterAsync(
         Status? status = null,
         int? approverId = null,
         CancellationToken? cancellationToken = null)
     {
         var query = dbContext.Set<ExpenseApproval>()
                              .Include(x => x.Approver)
-                             .ThenInclude(a => a!.FirstName)
-                             .Include(x => x.Approver)
-                             .ThenInclude(a => a!.LastName)
-                             .Include(x => x.Approver)
-                             .ThenInclude(a => a!.IBAN)
-                             .Include(x => x.Approver)
-                             .ThenInclude(a => a!.Id)
-                             .Include(x => x.Approver)
-                             .ThenInclude(a => a!.IdentityNumber)
                              .Include(x => x.Expense)
                              .AsQueryable();
         if (status is not null)

@@ -55,7 +55,7 @@ public class EfAppUserRepository : IEfAppUserRepository
     /// <param name="phone">The phone of the AppUser to retrieve (optional).</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations (optional).</param>
     /// <returns>The retrieved AppUser.</returns>
-    public async Task<AppUser> GetAppUserByParameter(
+    public async Task<AppUser> GetAppUserByParameterAsync(
         int? id = null,
         string? identityNumber = null,
         string? email = null,
@@ -129,7 +129,7 @@ public class EfAppUserRepository : IEfAppUserRepository
     /// <param name="status">Optional parameter for filtering by user status.</param>
     /// <param name="cancellationToken">Optional cancellation token.</param>
     /// <returns>A list of filtered AppUsers.</returns>
-    public async Task<List<AppUser>> FilterAppUsersByParameter(
+    public async Task<List<AppUser>> FilterAppUsersByParameterAsync(
         string? firstName = null,
         string? lastName = null,
         UserRole? role = null,

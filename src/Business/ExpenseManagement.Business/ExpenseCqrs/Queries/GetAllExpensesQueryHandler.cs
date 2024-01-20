@@ -24,7 +24,7 @@ public class GetAllExpensesQueryHandler :
         GetAllExpensesQuery request,
         CancellationToken cancellationToken)
     {
-        var Expenses = await expenseRepository.GetAllExpensesAsync(cancellationToken);
-        return new ApiResponse<List<ExpenseResponse>>(mapper.Map<List<ExpenseResponse>>(Expenses));
+        var expenses = await expenseRepository.GetAllExpensesAsync(cancellationToken);
+        return new ApiResponse<List<ExpenseResponse>>(mapper.Map<List<ExpenseResponse>>(expenses));
     }
 }

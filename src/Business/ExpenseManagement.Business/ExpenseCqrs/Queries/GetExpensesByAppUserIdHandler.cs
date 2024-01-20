@@ -40,7 +40,7 @@ public class GetExpensesByAppUserIdQueryHandler :
         CancellationToken cancellationToken)
     {
         // Retrieve the expense based on the provAppUserided AppUserid parameter.
-        var expenses = await expenseRepository.GetExpenseByAppUserId(request.AppUserId, cancellationToken);
+        var expenses = await expenseRepository.GetExpenseByAppUserIdAsync(request.AppUserId, cancellationToken);
 
         // If no expense is found, return an error response.
         if(expenses is null)

@@ -13,9 +13,11 @@ public class EndpointRoute
     public const string UnBlockAppUser = "UnBlockAppUser";
     public const string GetAppUserById = "GetAppUserById/{id}";
     public const string GetExpenseById = "GetExpenseById/{id}";
+    public const string GetExpenseApprovalById = "GetExpenseApprovalById/{id}";
     public const string GetAppUserBy = "GetAppUserBy";
     public const string GetBy = "GetBy";
     public const string GetByAppUser = "GetByAppUser";
+    public const string GetByApprover = "GetByApprover";
     public const string Delete = "Delete/{id}";
     public const string Update = "Update";
     public const string Create = "Create";

@@ -43,7 +43,7 @@ public class DeleteExpenseCommandHandler :
         DeleteExpenseCommand request,
         CancellationToken cancellationToken)
     {
-        var entity = expenseRepository.GetExpenseById(request.Id, cancellationToken);
+        var entity = expenseRepository.GetExpenseByIdAsync(request.Id, cancellationToken);
         if(entity is null)
             return new ApiResponse(ExceptionMessages.NotFound(request.Id));
 

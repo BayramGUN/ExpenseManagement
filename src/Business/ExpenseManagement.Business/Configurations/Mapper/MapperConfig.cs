@@ -8,6 +8,8 @@ using ExpenseManagement.Schema.Authentication.Requests;
 using ExpenseManagement.Schema.Expense.Responses;
 using ExpenseManagement.Data.Entities;
 using ExpenseManagement.Schema.Expense.Requests;
+using ExpenseManagement.Schema.ExpenseApproval.Requests;
+using ExpenseManagement.Schema.ExpenseApproval.Responses;
 
 namespace ExpenseManagement.Business.Configurations.Mapper;
 
@@ -90,6 +92,25 @@ public class MapperConfig : Profile
                 opt => opt.MapFrom(src => src.RequestTimestamp))
             .ForMember(dest => dest.ApprovalStatus,
                 opt => opt.MapFrom(src => src.Status));
+
+        // Map CreateExpenseApprovalRequest to ExpenseApproval, specifying custom mappings
+        CreateMap<CreateExpenseApprovalRequest, ExpenseApproval>()
+            .ForMember(dest => dest.InsertUserId,
+                opt => opt.MapFrom(src => src.ApproverId))
+            .ForMember(x => x.ApprovalStatus,
+                opt => opt.MapFrom(src => src.ApprovalStatus.ParseStatus()))
+            .ForMember(dest => dest.Description,
+                opt => opt.MapFrom(src => src.Description))
+            .ForMember(dest => dest.InsertDate,
+                opt => opt.MapFrom(src => src.RequestTimestamp));
+
+        // Map ExpenseApproval to ExpenseApprovalResponse, specifying custom mappings
+        CreateMap<ExpenseApproval, ExpenseApprovalResponse>()
+            .ForMember(dest => dest.ExpenseTitle, 
+                opt => opt.MapFrom(src => src.Expense!.Title))
+            .ForMember(dest => dest.ApproverName,
+                opt => opt.MapFrom(
+                    src => AppUserMappingStrings.AppUserFullName(src.Approver!.FirstName, src.Approver!.LastName)));   
   
     }
 }

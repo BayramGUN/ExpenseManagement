@@ -55,7 +55,7 @@ public class EfExpenseRepository : IEfExpenseRepository
     /// <param name="id">The ID of the Expense to retrieve.</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations.</param>
     /// <returns>The retrieved Expense.</returns>
-    public async Task<Expense> GetExpenseById(
+    public async Task<Expense> GetExpenseByIdAsync(
         int id,
         CancellationToken cancellationToken) =>
             await dbContext.Set<Expense>()
@@ -113,7 +113,7 @@ public class EfExpenseRepository : IEfExpenseRepository
     /// <param name="expensedDate">Optional parameter for filtering by expenses expensed date.</param>
     /// <param name="status">Optional parameter for filtering by expenses status.</param>
     /// <returns>A list of filtered Expenses.</returns>
-    public async Task<List<Expense>> FilterExpensesByParameter(
+    public async Task<List<Expense>> FilterExpensesByParameterAsync(
         Status? status = null,
         DateTime? expensedDate = null,
         decimal? amount = null,
@@ -145,7 +145,7 @@ public class EfExpenseRepository : IEfExpenseRepository
     /// <param name="appUserId">The ID of the application user for whom expenses are retrieved.</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations.</param>
     /// <returns>A list of expenses associated with the specified application user ID.</returns>
-    public async Task<List<Expense>> GetExpenseByAppUserId(
+    public async Task<List<Expense>> GetExpenseByAppUserIdAsync(
         int appUserId, 
         CancellationToken cancellationToken) => 
             await dbContext.Set<Expense>()

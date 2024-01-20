@@ -37,7 +37,7 @@ public interface IEfAppUserRepository
     /// <param name="userName">The username of the AppUser to retrieve (optional).</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations (optional).</param>
     /// <returns>The retrieved AppUser.</returns>
-    Task<AppUser> GetAppUserByParameter(
+    Task<AppUser> GetAppUserByParameterAsync(
             int? id = null, 
             string? identityNumber = null,
             string? email = null,
@@ -56,7 +56,7 @@ public interface IEfAppUserRepository
     /// <param name="status">The status of the AppUsers to retrieve (optional).</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations (optional).</param>
     /// <returns>The retrieved AppUsers.</returns>
-    Task<List<AppUser>> FilterAppUsersByParameter(
+    Task<List<AppUser>> FilterAppUsersByParameterAsync(
             string? firstName = null,
             string? lastName = null,
             UserRole? role = null,

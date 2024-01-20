@@ -22,5 +22,13 @@ public class ApproveExpenseValidator : AbstractValidator<ApproveExpenseRequest>
         RuleFor(x => x.UserId).NotNull().NotEmpty()
             .GreaterThan(0)
             .LessThanOrEqualTo(int.MaxValue);
+
+        RuleFor(x => x.ExpenseId).NotNull().NotEmpty()
+            .GreaterThan(0)
+            .LessThanOrEqualTo(int.MaxValue);
+
+        RuleFor(x => x.ExpenseId).NotNull().NotEmpty()
+            .GreaterThan(0)
+            .LessThanOrEqualTo(int.MaxValue);
     }
 }

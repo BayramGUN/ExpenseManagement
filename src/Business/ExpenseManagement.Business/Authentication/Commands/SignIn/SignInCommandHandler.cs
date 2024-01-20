@@ -41,7 +41,7 @@ public class SignInCommandHandler :
     public async Task<ApiResponse<TokenResponse>> Handle(SignInCommand request, CancellationToken cancellationToken)
     {
         // Retrieve the AppUser based on the provided credentials
-        var appUser = await appUserRepository.GetAppUserByParameter(
+        var appUser = await appUserRepository.GetAppUserByParameterAsync(
             userName: request.Model.UserName,
             email: request.Model.Email,
             phone: request.Model.Phone,

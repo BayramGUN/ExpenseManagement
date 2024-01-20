@@ -58,7 +58,7 @@ public class ApproveExpenseCommandHandler :
         ApproveExpenseCommand request,
         CancellationToken cancellationToken)
     {
-        var expense = await expenseRepository.GetExpenseById(request.Model.ExpenseId, cancellationToken);
+        var expense = await expenseRepository.GetExpenseByIdAsync(request.Model.ExpenseId, cancellationToken);
         if(expense is null)
             return new ApiResponse(ExceptionMessages.NotFound(request.Model.ExpenseId));
 

@@ -105,6 +105,8 @@ cd src/Presentation/API/ExpenseManagement.Api; dotnet user-secrets list
   - [ExpenseApproval Entity Model](/Documents/Entities/ExpenseApproval.Entity.md)
   - [Payment Entity Model](/Documents/Entities/Payment.Entity.md)
 
+![Database Diagram](/Documents/Images/DbDiagram.png)
+
 #### TechStack
 
 - [.net 7.0](https://learn.microsoft.com/tr-tr/dotnet/core/whats-new/dotnet-7)

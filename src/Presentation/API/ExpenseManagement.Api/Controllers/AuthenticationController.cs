@@ -1,8 +1,6 @@
 using ExpenseManagement.Base.Response;
 using ExpenseManagement.Base.Routes;
 using ExpenseManagement.Business.Authentication.Commands;
-using ExpenseManagement.Business.Authentication.Commands.SignUp;
-using ExpenseManagement.Business.Authentication.Commands.UnBlockAppUser;
 using ExpenseManagement.Schema.Authentication.Requests;
 using ExpenseManagement.Schema.Authentication.Responses;
 using MediatR;

@@ -6,6 +6,7 @@ public class ExceptionMessages
 {
     public const string UserIsNotUnique = "User has been created before!";
     public const string ExpenseHasNotUniqueId = "There is a expense with same id. That is our problem sorry!";
+    public const string ExpenseApprovalHasNotUniqueId = "There is a expenseApproval with same id. That is our problem sorry!";
     public const string BlockedUser = "User has been blocked!";
     public const string NotBlockedUser = "User is not blocked!";
     public const string DeletedUser = "User has deleted after 3 wrong password entering!";

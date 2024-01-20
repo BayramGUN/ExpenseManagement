@@ -40,7 +40,7 @@ public class GetExpenseByIdQueryHandler :
         CancellationToken cancellationToken)
     {
         // Retrieve the expense based on the provided id parameter.
-        var expense = await expenseRepository.GetExpenseById(request.Id, cancellationToken);
+        var expense = await expenseRepository.GetExpenseByIdAsync(request.Id, cancellationToken);
 
         // If no expense is found, return an error response.
         if(expense is null)
