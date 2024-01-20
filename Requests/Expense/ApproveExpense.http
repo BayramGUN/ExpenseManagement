@@ -1,0 +1,21 @@
+@host=https://localhost:7066
+@token=ey.JjLBw..
+
+PATCH  {{host}}/api/Expenses/Approve
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+
+
+# status: [0]pending, [1]accepted, [2]rejected
+# expenseId: The id value of approving expense
+# userId: The value of approverId.
+# description (optional): If reject the expense you have to fill.
+{
+  "accessToken": "asdasd",
+  "userId": 1,
+  "requestTimestamp": "2024-01-19T23:39:01.831Z",
+  "status": 2,
+  "expenseId": 1,
+  "description": "Bana saçma geldi!"
+}

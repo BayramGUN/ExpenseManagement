@@ -1,0 +1,26 @@
+@host=https://localhost:7066
+@token=ey.JjLBw..
+
+@id=2
+
+
+GET {{host}}/api/Expenses/GetExpenseById/{{id}}
+Authorization: Bearer {{token}}
+
+# Response be like:
+
+#{
+#  "response": {
+#    "id": 2,
+#    "employeeName": "Hayri Petek",
+#    "amount": 1230.00,
+#    "expensedDate": "2024-01-19T01:26:21.234",
+#    "description": "Çok gerekliydi aldım.",
+#    "status": "Approved",
+#    "receiptPhotoUrl": "Fotoğraf çekincek ekhleneceh deyolla. Baken olce mi?"
+#  },
+#  "success": true,
+#  "message": "Success",
+#  "serverDate": "2024-01-19T23:57:09.879562Z",
+#  "referenceNo": "e2848b73-f725-4ad6-82a2-8f119aef6d83"
+#}

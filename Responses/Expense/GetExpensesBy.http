@@ -1,0 +1,43 @@
+@host=https://localhost:7066
+@token=ey.JjLBw..
+
+
+#optional
+@status=1
+#optional
+@expensedDate="01-17-2024"
+#optional
+@amount=1230
+
+
+
+GET {{host}}/api/Expenses/GetBy?Status={{status}}&ExpensedDate={{expensedDate}}&Amount={{amount}}
+Authorization: Bearer {{token}}
+
+# Response will be like that:
+#{
+#  "response": [
+#    {
+#      "id": 2,
+#      "employeeName": "Hayri Petek",
+#      "amount": 1230,
+#      "expensedDate": "2024-01-19T01:26:21.234",
+#      "description": "Çok gerekliydi aldım.",
+#      "status": "Approved",
+#      "receiptPhotoUrl": "Fotoğraf çekincek ekhleneceh deyolla. Baken olce mi?"
+#    },
+#    {
+#      "id": 3,
+#      "employeeName": "abuzer kömürcü",
+#      "amount": 1230,
+#      "expensedDate": "2024-01-19T05:29:55.275",
+#      "description": "acayip harcadım!",
+#      "status": "Approved",
+#      "receiptPhotoUrl": "asdasdasdqweqwe"
+#    }
+#  ],
+#  "success": true,
+#  "message": "Success",
+#  "serverDate": "2024-01-19T23:50:13.8762002Z",
+#  "referenceNo": "40d4a94f-464a-4572-a3a4-011ea2d7dde6"
+#}

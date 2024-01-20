@@ -1,7 +1,7 @@
 @host=https://localhost:7066
 @token=ey.JjLBw..
 
-POST {{host}}/api/AppUsers/Update
+PUT {{host}}/api/AppUsers/Update
 Content-Type: application/json
 Authorization: Bearer {{token}}
 

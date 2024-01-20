@@ -45,6 +45,13 @@ public class ExpenseController : ControllerBase
         var result = await mediator.Send(operation);
         return result;
     }
+    [HttpGet(EndpointRoute.GetExpenseById)]
+    public async Task<ApiResponse<ExpenseResponse>> GetExpenseById([FromRoute] int id)
+    {
+        var operation = new GetExpenseByIdQuery(id);
+        var result = await mediator.Send(operation);
+        return result;
+    }
 
 
     [Authorize(Roles = RoleStrings.Both)]

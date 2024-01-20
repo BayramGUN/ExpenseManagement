@@ -13,7 +13,7 @@
 @lastName=Petek
 
 
-GET {{host}}/api/AppUsers/GetAppUsersBy?LastName={{lastName}}&isActive={{isActive}}&role={{role}}&firstName={{firstName}}&status={{status}}
+GET {{host}}/api/AppUsers/GetBy?LastName={{lastName}}&isActive={{isActive}}&role={{role}}&firstName={{firstName}}&status={{status}}
 Authorization: Bearer {{token}}
 
 # Success response will be like that:

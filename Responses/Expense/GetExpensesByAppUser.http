@@ -1,0 +1,35 @@
+@host=https://localhost:7066
+@token=ey.JjLBw..
+
+@appUserId=2
+
+
+GET {{host}}/api/Expenses/GetByAppUser?appUserId={{appUserId}}
+Authorization: Bearer {{token}}
+
+#{
+#  "response": [
+#    {
+#      "id": 1,
+#      "employeeName": "Hayri Petek",
+#      "amount": 1230,
+#      "expensedDate": "2024-01-19T01:26:21.234",
+#      "description": "Nasıl bilinmeyen bir harcama?",
+#      "status": "Rejected",
+#      "receiptPhotoUrl": "Fotoğraf çekincek ekhleneceh deyolla. Baken olce mi?"
+#    },
+#    {
+#      "id": 2,
+#      "employeeName": "Hayri Petek",
+#      "amount": 1230,
+#      "expensedDate": "2024-01-19T01:26:21.234",
+#      "description": "Çok gerekliydi aldım.",
+#      "status": "Approved",
+#      "receiptPhotoUrl": "Fotoğraf çekincek ekhleneceh deyolla. Baken olce mi?"
+#    }
+#  ],
+#  "success": true,
+#  "message": "Success",
+#  "serverDate": "2024-01-19T23:37:34.3065921Z",
+#  "referenceNo": "33f13f95-4608-4af0-a3be-864e97f1d890"
+#}
