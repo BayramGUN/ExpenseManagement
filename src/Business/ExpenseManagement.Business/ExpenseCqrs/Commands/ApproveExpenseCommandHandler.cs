@@ -11,8 +11,8 @@ using ExpenseManagement.Data.Entities;
 using ExpenseApprovalManagement.Data.Repositories.Interfaces.Expenses;
 using System.Data.Entity.Core.Objects.DataClasses;
 using ExpenseManagement.Business.Common.Interfaces.EventBus;
-using ExpenseManagement.Business.ExpenseCqrs.Events;
 using ExpenseManagement.Base.Constants.Company;
+using ExpenseManagement.Business.PaymentCqrs.Events;
 
 namespace ExpenseManagement.Business.ExpenseCqrs.Commands;
 
@@ -86,8 +86,8 @@ public class ApproveExpenseCommandHandler :
     {
         await eventBus.PublishAsync(new PaymentEvent
             {
-                FromAccountNumber = InformationStrings.CompanyIBAN,
-                ToAccountNumber = expense.AppUser.IBAN,
+                FromAccountNumber = InformationStrings.CompanyAccountNumber,
+                ToAccountNumber = expense.AppUser.AccountNumber,
                 Amount = expense.Amount,
                 Description = InformationStrings.PaymentDescription(expense.Title)
             }, cancellationToken);

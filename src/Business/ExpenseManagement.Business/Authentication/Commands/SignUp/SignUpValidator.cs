@@ -32,8 +32,7 @@ public class SignUpValidator : AbstractValidator<SignUpRequest>
         RuleFor(x => x.IdentityNumber).NotNull().NotEmpty()
             .MaximumLength(11);
         
-        RuleFor(x => x.IBAN).NotNull().NotEmpty()
-            .MaximumLength(34);
+        RuleFor(x => x.AccountNumber).NotNull().NotEmpty();
         
         RuleFor(x => x.Password).NotNull().NotEmpty()
             .MinimumLength(8)

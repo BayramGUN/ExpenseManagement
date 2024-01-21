@@ -63,6 +63,8 @@ public interface IEfExpenseRepository
     Task<List<Expense>> FilterExpensesByParameterAsync(
             Status? status = null,
             DateTime? expensedDate = null,
+            DateTime? fromExpensedDate = null,
+            DateTime? toExpensedDate = null,
             decimal? amount = null,
             CancellationToken? cancellationToken = null
         );

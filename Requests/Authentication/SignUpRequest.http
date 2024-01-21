@@ -6,7 +6,7 @@ Content-Type: application/json
 {
   "userName": "abuzer72",
   "password": "Abuzer!123",
-  "iban": "TR240006233335524967892512",
+  "accountNumber": 12312322,
   "firstName": "abuzer",
   "lastName": "kömürcü",
   "email": "abuzer@komurcu.com",

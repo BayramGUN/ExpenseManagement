@@ -25,8 +25,7 @@ public class UpdateAppUserValidator : AbstractValidator<UpdateAppUserRequest>
             .Must((model, phone) => phone.IsNullOrEmpty() || phone!.IsValidPhone())
             .WithMessage((model, phone) => ValidationMessages.InvalidPhoneNumber(phone!));
         
-        RuleFor(x => x.IBAN)
-            .MaximumLength(34);
+        RuleFor(x => x.AccountNumber);
 
         RuleFor(x => x.UserName).MinimumLength(4).MaximumLength(20);
 

@@ -8,8 +8,7 @@ using System.Data;
 namespace ExpenseManagement.Business.ExpenseCqrs.Commands;
 
 /// <summary>
-/// Validator for the CreateExpenseRequest, providing rules for validating properties such as email, phone, first name,
-/// last name, identity number, IBAN, and user name.
+/// Validator for the CreateExpenseRequest, providing rules for validating properties...
 /// </summary>
 public class CreateExpenseValidator : AbstractValidator<CreateExpenseRequest>
 {

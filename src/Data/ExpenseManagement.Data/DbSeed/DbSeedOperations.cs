@@ -39,7 +39,7 @@ public static class DbSeedOperations
                 {
                     UserName = DefaultUsers.DefaultAdminUserName,
                     IdentityNumber = DefaultUsers.DefaultAdminIdentityNumber,
-                    IBAN = DefaultUsers.DefaultAdminIBAN,
+                    AccountNumber = DefaultUsers.DefaultAdminAccountNumber,
                     Role = UserRole.Admin,
                     Email = DefaultUsers.DefaultAdminEmail,
                     Phone = DefaultUsers.DefaultAdminPhone,
@@ -54,7 +54,7 @@ public static class DbSeedOperations
                 new()
                 {
                     IdentityNumber = DefaultUsers.DefaultEmployeeIdentityNumber,
-                    IBAN = DefaultUsers.DefaultEmployeeIBAN,
+                    AccountNumber = DefaultUsers.DefaultEmployeeAccountNumber,
                     UserName = DefaultUsers.DefaultEmployeeUserName,
                     Role = UserRole.Employee,
                     Email = DefaultUsers.DefaultEmployeeEmail,

@@ -10,6 +10,8 @@ using ExpenseManagement.Data.Entities;
 using ExpenseManagement.Schema.Expense.Requests;
 using ExpenseManagement.Schema.ExpenseApproval.Requests;
 using ExpenseManagement.Schema.ExpenseApproval.Responses;
+using ExpenseManagement.Schema.Payment.Responses;
+using ExpenseManagement.Schema.Payment.Requests;
 
 namespace ExpenseManagement.Business.Configurations.Mapper;
 
@@ -110,7 +112,19 @@ public class MapperConfig : Profile
                 opt => opt.MapFrom(src => src.Expense!.Title))
             .ForMember(dest => dest.ApproverName,
                 opt => opt.MapFrom(
-                    src => AppUserMappingStrings.AppUserFullName(src.Approver!.FirstName, src.Approver!.LastName)));   
+                    src => AppUserMappingStrings.AppUserFullName(src.Approver!.FirstName, src.Approver!.LastName)));
+            
+        // Map Payment to PaymentResponse, specifying custom mappings
+        CreateMap<Payment, PaymentResponse>()
+            .ForMember(dest => dest.AppUserName,
+                opt => opt.MapFrom(src => AppUserMappingStrings.AppUserFullName(
+                                    src.Expense!.AppUser.FirstName, 
+                                    src.Expense.AppUser.LastName)))
+            .ForMember(dest => dest.AppUserId,
+                opt => opt.MapFrom(src => src.Expense!.AppUserId));
+
+        // Map CreatePaymentRequest to Payment, specifying custom mappings
+        CreateMap<CreatePaymentRequest, Payment>();
   
     }
 }

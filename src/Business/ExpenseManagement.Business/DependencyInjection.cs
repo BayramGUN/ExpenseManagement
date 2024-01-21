@@ -1,5 +1,6 @@
 using System.Text;
 using AutoMapper;
+using ExpenseManagement.Base.Constants.Queue;
 using ExpenseManagement.Base.MessageBroker;
 using ExpenseManagement.Base.Token;
 using ExpenseManagement.Business.Common.Implementation.EventBus;
@@ -7,8 +8,7 @@ using ExpenseManagement.Business.Common.Implementation.Token;
 using ExpenseManagement.Business.Common.Interfaces.EventBus;
 using ExpenseManagement.Business.Common.Interfaces.Token;
 using ExpenseManagement.Business.Configurations.Mapper;
-using ExpenseManagement.Business.ExpenseCqrs.Events;
-using ExpenseManagement.Data.Entities;
+using ExpenseManagement.Business.PaymentCqrs.Events;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -40,11 +40,7 @@ public static class DependencyInjection
         // Configure AutoMapper with the specified profile 
         var mapperConfig = new MapperConfiguration(cfg => cfg.AddProfile(new MapperConfig()));
         services.AddSingleton(mapperConfig.CreateMapper());
-
-        /* // Add validators from the current assembly
-        services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly()); */
-
-        // Add authentication-related services
+        
         // Add messageBroker-related services
         services.AddAuthentication(configuration)
                 .AddMessageBroker(configuration);
@@ -125,10 +121,11 @@ public static class DependencyInjection
                     h.Username(settings.UserName);
                     h.Password(settings.Password);
                 });
-                configurator.ReceiveEndpoint("temp-queue", c => {
-                    c.Handler<PaymentEvent>(ctx => {
-                        return Console.Out.WriteAsync($"{ctx.Message.Amount}");
+                configurator.ReceiveEndpoint(QueueNames.PaymentQueue, endpointConfigurator => {
+                    endpointConfigurator.UseMessageRetry(retryConfigurator => {
+                        retryConfigurator.Intervals(100, 500, 1000);
                     });
+                    endpointConfigurator.Consumer<PaymentEventConsumer>();
                 });
             });
         });

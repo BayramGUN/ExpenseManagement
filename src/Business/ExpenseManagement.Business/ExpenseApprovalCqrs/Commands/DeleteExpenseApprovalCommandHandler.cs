@@ -11,19 +11,15 @@ namespace ExpenseManagement.Business.ExpenseApprovalCqrs.Commands;
 public class DeleteExpenseApprovalCommandHandler :
     IRequestHandler<DeleteExpenseApprovalCommand, ApiResponse>
 {
-    private readonly IMapper mapper;
     private readonly IEfExpenseApprovalRepository expenseApprovalRepository;
 
     /// <summary>
     /// Initializes a new instance of the DeleteExpenseApprovalCommandHandler class.
     /// </summary>
-    /// <param name="mapper">The AutoMapper instance for object mapping.</param>
     /// <param name="expenseApprovalRepository">The repository for interacting with ExpenseApproval entities.</param>
     public DeleteExpenseApprovalCommandHandler(
-        IMapper mapper,
         IEfExpenseApprovalRepository expenseApprovalRepository)
     {
-        this.mapper = mapper;
         this.expenseApprovalRepository = expenseApprovalRepository;
     }
 

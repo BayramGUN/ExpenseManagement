@@ -6,6 +6,7 @@ using ExpenseManagement.Data.Repositories.Implementations.AppUsers;
 using ExpenseManagement.Data.Repositories.Implementations.Expenses;
 using ExpenseManagement.Data.Repositories.Interfaces.AppUsers;
 using ExpenseManagement.Data.Repositories.Interfaces.Expenses;
+using ExpenseManagement.Data.Repositories.Interfaces.Payments;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,8 +30,7 @@ public static class DependencyInjection
         ConfigurationManager configuration)
     {
         services.AddPersistence(configuration);
-        services.AddScoped<IEfAppUserRepository, EfAppUserRepository>();
-        services.AddScoped<IEfExpenseRepository, EfExpenseRepository>();
+
         return services;
     }
 
@@ -54,9 +54,13 @@ public static class DependencyInjection
             return new DapperSqlConnectionFactory(connection) 
                 ?? throw new ApplicationException(ExceptionMessages.NullConnectionString);
         });
+
         services.AddScoped<DapperExpenseRepository>();
+        services.AddScoped<IEfAppUserRepository, EfAppUserRepository>();
         services.AddScoped<IEfExpenseRepository, EfExpenseRepository>();
         services.AddScoped<IEfExpenseApprovalRepository, EfExpenseApprovalRepository>();
+        services.AddScoped<IEfPaymentRepository, EfPaymentRepository>();
+        
         return services;
     }
 }

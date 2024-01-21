@@ -12,20 +12,16 @@ namespace ExpenseManagement.Business.ExpenseApprovalCqrs.Commands;
 public class UpdateExpenseApprovalCommandHandler :
     IRequestHandler<UpdateExpenseApprovalCommand, ApiResponse>
 {
-    private readonly IMapper mapper;
     private readonly IEfExpenseApprovalRepository expenseApprovalRepository;
 
     /// <summary>
     /// Initializes a new instance of the UpdateExpenseApprovalCommandHandler class.
     /// </summary>
-    /// <param name="mapper">The AutoMapper instance for object mapping.</param>
     /// <param name="expenseApprovalRepository">The repository for interacting with ExpenseApproval entities.</param>
     /// <param name="tokenGenerator">The JWT token generator for Updating authentication tokens.</param>
     public UpdateExpenseApprovalCommandHandler(
-        IMapper mapper,
         IEfExpenseApprovalRepository expenseApprovalRepository)
     {
-        this.mapper = mapper;
         this.expenseApprovalRepository = expenseApprovalRepository;
     }
 
@@ -45,7 +41,7 @@ public class UpdateExpenseApprovalCommandHandler :
                                 request.Model.Id, cancellationToken);
                                 
         if(entityWillUpdate is null)
-            return new ApiResponse(ExceptionMessages.ExpenseApprovalHasNotUniqueId);
+            return new ApiResponse(ExceptionMessages.NotFound(request.Model.Id));
 
         entityWillUpdate.ApprovalStatus = request.Model.ApprovalStatus ?? entityWillUpdate.ApprovalStatus;
         entityWillUpdate.Description = request.Model.Description ?? entityWillUpdate.Description;

@@ -34,8 +34,8 @@ public class CreateAppUserValidator : AbstractValidator<CreateAppUserRequest>
         RuleFor(x => x.IdentityNumber).NotNull().NotEmpty()
             .MaximumLength(11);
         
-        RuleFor(x => x.IBAN).NotNull().NotEmpty()
-            .MaximumLength(34);
+        RuleFor(x => x.AccountNumber).NotNull().NotEmpty()
+            .GreaterThan(0);
         
         RuleFor(x => x.UserName).MinimumLength(4).MaximumLength(20);
     }

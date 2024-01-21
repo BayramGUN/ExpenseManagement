@@ -41,11 +41,11 @@ public class EfExpenseRepository : IEfExpenseRepository
         int id, 
         CancellationToken cancellationToken)
     {
-        var Expense = await dbContext.Set<Expense>()
+        var expense = await dbContext.Set<Expense>()
                                      .Where(x => x.Id == id)
                                      .FirstOrDefaultAsync(cancellationToken);
-        Expense!.IsActive = false;
-        dbContext.Update(Expense);
+        expense!.IsActive = false;
+        dbContext.Update(expense);
         await dbContext.SaveChangesAsync();
     }
 
@@ -69,10 +69,10 @@ public class EfExpenseRepository : IEfExpenseRepository
     /// <param name="Expense">The Expense entity to update.</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations.</param>
     public async Task<Expense> UpdateExpenseAsync(
-        Expense Expense, 
+        Expense expense, 
         CancellationToken cancellationToken)
     {
-        var result = dbContext.Update(Expense);
+        var result = dbContext.Update(expense);
         await dbContext.SaveChangesAsync();
         return result.Entity;
     }
@@ -116,6 +116,8 @@ public class EfExpenseRepository : IEfExpenseRepository
     public async Task<List<Expense>> FilterExpensesByParameterAsync(
         Status? status = null,
         DateTime? expensedDate = null,
+        DateTime? fromExpensedDate = null,
+        DateTime? toExpensedDate = null,
         decimal? amount = null,
         CancellationToken? cancellationToken = null)
     {
@@ -133,8 +135,18 @@ public class EfExpenseRepository : IEfExpenseRepository
                 (x.ExpensedDate.Month == expensedDate.Value.Month) && 
                 (x.ExpensedDate.Day == expensedDate.Value.Day));
 
+        if(fromExpensedDate is not null)
+            query = query.Where(x => x.ExpensedDate > fromExpensedDate);
+
+        if(toExpensedDate is not null)
+            query = query.Where(x => x.ExpensedDate < toExpensedDate);
+
+        //if(toExpensedDate is not null && fromExpensedDate is not null)
+            //query = query.Where(x => x.ExpensedDate > fromExpensedDate &&
+               //                 x.ExpensedDate < toExpensedDate);
+
         if (amount is not null)
-            query = query.Where(x => x.Status == status);
+            query = query.Where(x => x.Amount == amount);
 
         return await query.ToListAsync(cancellationToken ?? CancellationToken.None);
     }

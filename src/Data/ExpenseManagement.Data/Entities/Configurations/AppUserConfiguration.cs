@@ -34,7 +34,7 @@ public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
         builder.Property(x => x.LastActivityDate).IsRequired(true);
         builder.Property(x => x.PasswordRetryCount).IsRequired(true);
         builder.Property(x => x.Status).IsRequired(true);
-        builder.Property(x => x.IBAN).IsRequired(true).HasMaxLength(34);
+        builder.Property(x => x.AccountNumber).IsRequired(true);
 
         builder.HasIndex(x => x.IdentityNumber).IsUnique(true);
         builder.HasIndex(x => x.Email).IsUnique(true);

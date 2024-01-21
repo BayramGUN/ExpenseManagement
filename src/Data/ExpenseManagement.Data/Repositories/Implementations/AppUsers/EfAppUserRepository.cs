@@ -114,7 +114,7 @@ public class EfAppUserRepository : IEfAppUserRepository
             => await dbContext.Set<AppUser>().Where(
                 x => x.IdentityNumber == entity.IdentityNumber || 
                 x.Email == entity.Email ||
-                x.IBAN == entity.IBAN ||
+                x.AccountNumber == entity.AccountNumber ||
                 x.Phone == entity.Phone ||
                 x.UserName! == entity.UserName )
             .FirstOrDefaultAsync(cancellationToken) is null;

@@ -2,7 +2,6 @@ using AutoMapper;
 using ExpenseManagement.Base.Constants.Messages;
 using ExpenseManagement.Base.Response;
 using ExpenseManagement.Data.Repositories.Interfaces.AppUsers;
-using ExpenseManagement.Schema.AppUser.Requests;
 using MediatR;
 
 
@@ -15,19 +14,14 @@ public class UpdateAppUserCommandHandler :
     IRequestHandler<UpdateAppUserCommand, ApiResponse>
 {
     private readonly IEfAppUserRepository appUserRepository;
-    private readonly IMapper mapper;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="UpdateAppUserCommandHandler"/> class.
     /// </summary>
-    /// <param name="mapper">The AutoMapper instance.</param>
     /// <param name="appUserRepository">The repository for AppUser entities.</param>
-    public UpdateAppUserCommandHandler(
-        IEfAppUserRepository appUserRepository, 
-        IMapper mapper)
+    public UpdateAppUserCommandHandler(IEfAppUserRepository appUserRepository)
     {
         this.appUserRepository = appUserRepository;
-        this.mapper = mapper;
     }
     
     /// <summary>
@@ -53,7 +47,7 @@ public class UpdateAppUserCommandHandler :
             return new ApiResponse<string>(ExceptionMessages.NotFound(request.Model.Id));
             
         userWillUpdate.Email = request.Model.Email ?? userWillUpdate.Email;
-        userWillUpdate.IBAN = request.Model.IBAN ?? userWillUpdate.IBAN;
+        userWillUpdate.AccountNumber = request.Model.AccountNumber ?? userWillUpdate.AccountNumber;
         userWillUpdate.Phone = request.Model.Phone ?? userWillUpdate.Phone;
         userWillUpdate.UserName = request.Model.UserName ?? userWillUpdate.UserName;
         userWillUpdate.UpdateDate = request.Model.RequestTimestamp;

@@ -77,7 +77,9 @@ public class EfExpenseApprovalRepository : IEfExpenseApprovalRepository
     /// <param name="entity">The ExpenseApproval entity to be added to the repository.</param>
     /// <param name="cancellationToken">The cancellation token for handling asynchronous operations.</param>
     /// <returns>The added ExpenseApproval entity.</returns>
-    public async Task<ExpenseApproval> CreateExpenseApprovalAsync(ExpenseApproval entity, CancellationToken cancellationToken)
+    public async Task<ExpenseApproval> CreateExpenseApprovalAsync(
+        ExpenseApproval entity, 
+        CancellationToken cancellationToken)
     {
         var result = await dbContext.AddAsync(entity, cancellationToken);
         await dbContext.SaveChangesAsync(cancellationToken);

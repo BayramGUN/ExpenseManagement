@@ -43,6 +43,8 @@ public class GetExpensesByQueryHandler :
         var expenses = await expenseRepository.FilterExpensesByParameterAsync(
             status: request.Model.Status,
             expensedDate: request.Model.ExpensedDate,
+            fromExpensedDate: request.Model.FromExpensedDate,
+            toExpensedDate: request.Model.ToExpensedDate,
             amount: request.Model.Amount,
             cancellationToken: cancellationToken
         );

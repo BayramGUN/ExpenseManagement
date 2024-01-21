@@ -11,20 +11,15 @@ namespace ExpenseManagement.Business.ExpenseCqrs.Commands;
 public class UpdateExpenseCommandHandler :
     IRequestHandler<UpdateExpenseCommand, ApiResponse>
 {
-    private readonly IMapper mapper;
     private readonly IEfExpenseRepository expenseRepository;
 
     /// <summary>
     /// Initializes a new instance of the UpdateExpenseCommandHandler class.
     /// </summary>
-    /// <param name="mapper">The AutoMapper instance for object mapping.</param>
     /// <param name="expenseRepository">The repository for interacting with Expense entities.</param>
     /// <param name="tokenGenerator">The JWT token generator for Updating authentication tokens.</param>
-    public UpdateExpenseCommandHandler(
-        IMapper mapper,
-        IEfExpenseRepository expenseRepository)
+    public UpdateExpenseCommandHandler(IEfExpenseRepository expenseRepository)
     {
-        this.mapper = mapper;
         this.expenseRepository = expenseRepository;
     }
 
@@ -42,7 +37,7 @@ public class UpdateExpenseCommandHandler :
 
         var entityWillUpdate = await expenseRepository.GetExpenseByIdAsync(request.Model.Id, cancellationToken);
         if(entityWillUpdate is null)
-            return new ApiResponse(ExceptionMessages.ExpenseHasNotUniqueId);
+            return new ApiResponse(ExceptionMessages.NotFound(request.Model.Id));
 
         entityWillUpdate.Amount = request.Model.Amount ?? entityWillUpdate.Amount;
         entityWillUpdate.Description = request.Model.Description ?? entityWillUpdate.Description;

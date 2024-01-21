@@ -12,7 +12,9 @@ public class EndpointRoute
     public const string SignUp = "SignUp";
     public const string UnBlockAppUser = "UnBlockAppUser";
     public const string GetAppUserById = "GetAppUserById/{id}";
+    public const string GetPaymentById = "GetPaymentById/{id}";
     public const string GetExpenseById = "GetExpenseById/{id}";
+    public const string GetPaymentByExpenseId = "GetPaymentByExpenseId/{id}";
     public const string GetExpenseApprovalById = "GetExpenseApprovalById/{id}";
     public const string GetAppUserBy = "GetAppUserBy";
     public const string GetBy = "GetBy";
