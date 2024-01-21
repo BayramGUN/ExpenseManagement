@@ -24,5 +24,8 @@ public class CreatePaymentValidator : AbstractValidator<CreatePaymentRequest>
         RuleFor(x => x.UserId).NotNull().NotEmpty()
             .GreaterThan(0)
             .LessThanOrEqualTo(int.MaxValue);
+            
+        RuleFor(x => x.PaymentDate).NotNull().NotEmpty()
+            .LessThanOrEqualTo(DateTime.Now);
     }
 }

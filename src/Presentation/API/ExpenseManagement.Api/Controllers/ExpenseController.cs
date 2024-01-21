@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExpenseManagement.Api.Controllers;
 
+[Authorize(Roles = RoleStrings.Both)]
 [Route(ControllerRoute.BaseRoute)]
 [ApiController]
 public class ExpenseController : ControllerBase
@@ -72,7 +73,7 @@ public class ExpenseController : ControllerBase
         return result;
     }
 
-   // [Authorize(Roles = RoleStrings.AdminRole)]
+    [Authorize(Roles = RoleStrings.AdminRole)]
     [HttpPatch(EndpointRoute.Approve)]
     public async Task<ApiResponse> ApproveExpense([FromBody] ApproveExpenseRequest request)
     {
@@ -81,6 +82,7 @@ public class ExpenseController : ControllerBase
         return result;
     }
 
+    [Authorize(Roles = RoleStrings.AdminRole)]
     [HttpPut(EndpointRoute.Update)]
     public async Task<ApiResponse> UpdateExpense([FromBody] UpdateExpenseRequest request)
     {

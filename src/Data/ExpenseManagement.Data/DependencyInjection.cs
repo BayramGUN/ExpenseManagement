@@ -4,6 +4,7 @@ using ExpenseManagement.Base.Constants.Messages;
 using ExpenseManagement.Data.DbContexts;
 using ExpenseManagement.Data.Repositories.Implementations.AppUsers;
 using ExpenseManagement.Data.Repositories.Implementations.Expenses;
+using ExpenseManagement.Data.Repositories.Interfaces;
 using ExpenseManagement.Data.Repositories.Interfaces.AppUsers;
 using ExpenseManagement.Data.Repositories.Interfaces.Expenses;
 using ExpenseManagement.Data.Repositories.Interfaces.Payments;
@@ -55,7 +56,7 @@ public static class DependencyInjection
                 ?? throw new ApplicationException(ExceptionMessages.NullConnectionString);
         });
 
-        services.AddScoped<DapperExpenseRepository>();
+        services.AddScoped<IDapperExpenseReportRepository, DapperExpenseReportRepository>();
         services.AddScoped<IEfAppUserRepository, EfAppUserRepository>();
         services.AddScoped<IEfExpenseRepository, EfExpenseRepository>();
         services.AddScoped<IEfExpenseApprovalRepository, EfExpenseApprovalRepository>();

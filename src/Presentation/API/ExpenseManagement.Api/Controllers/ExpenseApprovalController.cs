@@ -15,6 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ExpenseManagement.Api.Controllers;
 
+[Authorize(Roles = RoleStrings.AdminRole)]
 [Route(ControllerRoute.BaseRoute)]
 [ApiController]
 public class ExpenseApprovalController : ControllerBase

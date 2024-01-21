@@ -69,6 +69,7 @@ public class ApproveExpenseCommandHandler :
 
         expense.Status = request.Model.Status;
         expense.UpdateUserId = request.Model.UserId;
+        
         if(expense.Status is Status.Rejected)
             expense.Description = request.Model.Description;
 

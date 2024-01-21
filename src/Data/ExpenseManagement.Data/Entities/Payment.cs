@@ -1,4 +1,3 @@
-using Azure.Core;
 using ExpenseManagement.Base.Entity;
 
 namespace ExpenseManagement.Data.Entities;

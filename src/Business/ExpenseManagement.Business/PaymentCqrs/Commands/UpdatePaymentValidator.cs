@@ -9,8 +9,7 @@ using ExpenseManagement.Schema.Payment.Requests;
 namespace ExpenseManagement.Business.PaymentCqrs.Commands;
 
 /// <summary>
-/// Validator for the UpdatePaymentRequest, providing rules for validating properties such as email, phone, first name,
-/// last name, identity number, IBAN, and user name.
+/// Validator for the UpdatePaymentRequest, providing rules for validating properties...
 /// </summary>
 public class UpdatePaymentValidator : AbstractValidator<UpdatePaymentRequest>
 {

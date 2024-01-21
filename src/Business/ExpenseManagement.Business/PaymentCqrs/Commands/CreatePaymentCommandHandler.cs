@@ -2,15 +2,11 @@ using AutoMapper;
 using MediatR;
 using ExpenseManagement.Base.Constants.Messages;
 using ExpenseManagement.Base.Response;
-using ExpenseManagement.Data.Repositories.Interfaces.Expenses;
-using ExpenseManagement.Business.Common;
-using ExpenseManagement.Base.Enums;
-using ExpenseManagement.Base.Constants.Authentication;
-using System.Text;
 using ExpenseManagement.Data.Entities;
 using ExpenseManagement.Data.Repositories.Interfaces.Payments;
 
 namespace ExpenseManagement.Business.PaymentCqrs.Commands;
+
 /// Handles the command for user create user from admin, mapping the request to an payment entity,
 /// checking for uniqueness, creating a new user, generating a JWT token, and returning the response.
 /// </summary>

@@ -24,6 +24,9 @@ public class EndpointRoute
     public const string Update = "Update";
     public const string Create = "Create";
     public const string Approve = "Approve";
+    public const string ApprovalStatusReport = "ApprovalStatusReport";
+    public const string PaymentDifferenceReport = "PaymentDifferenceReport";
+    public const string GetByAppUserId = "{appUserId}";
     
 
 }
