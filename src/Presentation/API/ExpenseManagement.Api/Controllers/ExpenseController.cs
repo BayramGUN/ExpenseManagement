@@ -46,6 +46,7 @@ public class ExpenseController : ControllerBase
         var result = await mediator.Send(operation);
         return result;
     }
+
     [HttpGet(EndpointRoute.GetExpenseById)]
     public async Task<ApiResponse<ExpenseResponse>> GetExpenseById([FromRoute] int id)
     {
@@ -55,7 +56,6 @@ public class ExpenseController : ControllerBase
     }
 
 
-    [Authorize(Roles = RoleStrings.Both)]
     [HttpPost(EndpointRoute.Create)]
     public async Task<ApiResponse> CreateExpense([FromBody] CreateExpenseRequest request)
     {
@@ -64,7 +64,6 @@ public class ExpenseController : ControllerBase
         return result;
     }
     
-    [Authorize(Roles = RoleStrings.Both)]
     [HttpDelete(EndpointRoute.Delete)]
     public async Task<ApiResponse> DeleteExpense([FromRoute] int id)
     {

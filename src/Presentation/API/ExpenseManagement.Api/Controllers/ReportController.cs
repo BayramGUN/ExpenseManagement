@@ -1,14 +1,7 @@
-using ExpenseManagement.Base.Constants.Authorization;
-using ExpenseManagement.Base.Response;
 using ExpenseManagement.Base.Routes;
-using ExpenseManagement.Business.PaymentCqrs.Commands;
-using ExpenseManagement.Business.PaymentCqrs.Queries;
 using ExpenseManagement.Data.Entities;
 using ExpenseManagement.Data.Repositories.Implementations.Expenses;
-using ExpenseManagement.Schema.Payment.Requests;
-using ExpenseManagement.Schema.Payment.Responses;
-using MediatR;
-using Microsoft.AspNetCore.Authorization;
+using ExpenseManagement.Data.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExpenseManagement.Api.Controllers;
@@ -17,9 +10,9 @@ namespace ExpenseManagement.Api.Controllers;
 [ApiController]
 public class ReportController : ControllerBase
 {  
-    private readonly DapperExpenseReportRepository expenseReportRepository;
+    private readonly IDapperExpenseReportRepository expenseReportRepository;
 
-    public ReportController(DapperExpenseReportRepository expenseReportRepository)
+    public ReportController(IDapperExpenseReportRepository expenseReportRepository)
     {
         this.expenseReportRepository = expenseReportRepository;
     }
@@ -34,6 +27,7 @@ public class ReportController : ControllerBase
     {
         return expenseReportRepository.GetApprovalStatusReports();
     }
+
     [HttpGet(EndpointRoute.PaymentDifferenceReport)]
     public IEnumerable<PaymentAndApprovedExpenseDifference> GetPaymentAndApprovedExpenseDifference()
     {
