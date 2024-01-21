@@ -11,5 +11,7 @@ public class ValidationMessages
     public const string PasswordMustHasUpperCase = "Your password must contain at least one uppercase letter.";
     public const string PasswordMustHasDigit = "Your password must contain at least one digit.";
     public const string PasswordMustHasSymbol = "Your password must contain at least one (!? *.).";
+    public static readonly Func<string, string> ExpenseApprovedBefore 
+        = (expenseTitle) => $"{expenseTitle} is approved before!";
 
 }

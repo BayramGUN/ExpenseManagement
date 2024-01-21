@@ -64,6 +64,9 @@ public class ApproveExpenseCommandHandler :
         if(expense is null)
             return new ApiResponse(ExceptionMessages.NotFound(request.Model.ExpenseId));
 
+        if(expense.Status is Status.Approved)
+            return new ApiResponse(ValidationMessages.ExpenseApprovedBefore(expense.Title));
+
         expense.Status = request.Model.Status;
         expense.UpdateUserId = request.Model.UserId;
         if(expense.Status is Status.Rejected)
@@ -79,8 +82,7 @@ public class ApproveExpenseCommandHandler :
         await expenseApprovalRepository.CreateExpenseApprovalAsync(expenseApproval, cancellationToken);
         if(expenseApproval.ApprovalStatus is Status.Approved)
             await PublishPaymentEvent(expense, request.Model, cancellationToken);
-
-            
+   
         return new ApiResponse(SuccessMessages.UpdatedSuccess(expense.Title));
     }
 
