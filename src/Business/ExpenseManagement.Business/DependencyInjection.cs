@@ -9,6 +9,8 @@ using ExpenseManagement.Business.Common.Interfaces.EventBus;
 using ExpenseManagement.Business.Common.Interfaces.Token;
 using ExpenseManagement.Business.Configurations.Mapper;
 using ExpenseManagement.Business.PaymentCqrs.Events;
+using ExpenseManagement.Data.Repositories.Implementations.Expenses;
+using ExpenseManagement.Data.Repositories.Interfaces.Payments;
 using MassTransit;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -112,6 +114,9 @@ public static class DependencyInjection
         services.AddMassTransit(busConfigurator => 
         {
             busConfigurator.SetKebabCaseEndpointNameFormatter();
+
+            busConfigurator.AddConsumer<PaymentEventConsumer>();
+
             busConfigurator.UsingRabbitMq((context, configurator) => 
             {
                 MessageBrokerSettings settings = context.GetRequiredService<MessageBrokerSettings>();
@@ -125,8 +130,8 @@ public static class DependencyInjection
                     endpointConfigurator.UseMessageRetry(retryConfigurator => {
                         retryConfigurator.Intervals(100, 500, 1000);
                     });
-                    endpointConfigurator.Consumer<PaymentEventConsumer>();
                 });
+                configurator.ConfigureEndpoints(context);
             });
         });
         return services;

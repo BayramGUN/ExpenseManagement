@@ -5,6 +5,7 @@ namespace ExpenseManagement.Base.Constants.Messages;
 public class ExceptionMessages
 {
     public const string UserIsNotUnique = "User has been created before!";
+    public const string PaymentCouldNotBeAble = "Some problem with the payment system!";
     public const string ExpenseHasNotUniqueId = "There is a expense with same id. That is our problem sorry!";
     public const string PaymentHasNotUniqueId = "There is a payment with same id. That is our problem sorry!";
     public const string ExpenseApprovalHasNotUniqueId = "There is a expenseApproval with same id. That is our problem sorry!";

@@ -13,6 +13,8 @@ using System.Data.Entity.Core.Objects.DataClasses;
 using ExpenseManagement.Business.Common.Interfaces.EventBus;
 using ExpenseManagement.Base.Constants.Company;
 using ExpenseManagement.Business.PaymentCqrs.Events;
+using ExpenseManagement.Schema.ExpenseApproval.Requests;
+using ExpenseManagement.Schema.Expense.Requests;
 
 namespace ExpenseManagement.Business.ExpenseCqrs.Commands;
 
@@ -76,19 +78,24 @@ public class ApproveExpenseCommandHandler :
 
         await expenseApprovalRepository.CreateExpenseApprovalAsync(expenseApproval, cancellationToken);
         if(expenseApproval.ApprovalStatus is Status.Approved)
-            await PublishPaymentEvent(expense, cancellationToken);
+            await PublishPaymentEvent(expense, request.Model, cancellationToken);
 
             
         return new ApiResponse(SuccessMessages.UpdatedSuccess(expense.Title));
     }
 
-    private async Task PublishPaymentEvent(Expense expense, CancellationToken cancellationToken)
+    private async Task PublishPaymentEvent(
+        Expense expense, 
+        ApproveExpenseRequest request, 
+        CancellationToken cancellationToken)
     {
         await eventBus.PublishAsync(new PaymentEvent
             {
                 FromAccountNumber = InformationStrings.CompanyAccountNumber,
                 ToAccountNumber = expense.AppUser.AccountNumber,
                 Amount = expense.Amount,
+                ExpenseId = expense.Id,
+                ApproverId = request.UserId,
                 Description = InformationStrings.PaymentDescription(expense.Title)
             }, cancellationToken);
     }
