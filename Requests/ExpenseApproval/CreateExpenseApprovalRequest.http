@@ -1,0 +1,28 @@
+@host=https://localhost:7066
+@token=ey.JjLBw..
+
+POST {{host}}/api/ExpenseApprovals/Create
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+# userId: That is id value of the creater of user. 
+
+{
+  "accessToken": "abc123xyz456",
+  "userId": 2,
+  "requestTimestamp": "2024-01-19T23:23:12.962Z",
+  "expenseId": 1,
+  "description": "Dinner with clients",
+  "approverId": 2,
+  "approvalStatus": "Rejected"
+}
+
+#Success response be like:
+
+#{
+#  "success": true,
+#  "message": "1 is created successfully!",
+#  "serverDate": "2024-01-19T23:23:12.964Z",
+#  "referenceNo": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+#}
+

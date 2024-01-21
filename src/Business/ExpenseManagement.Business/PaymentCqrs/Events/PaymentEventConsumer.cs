@@ -7,7 +7,6 @@ using ExpenseManagement.Data.Entities;
 using ExpenseManagement.Data.Repositories.Interfaces.Payments;
 using MassTransit;
 using Newtonsoft.Json;
-using Serilog;
 
 namespace ExpenseManagement.Business.PaymentCqrs.Events;
 

@@ -40,13 +40,13 @@ public class GetPaymentByIdQueryHandler :
         CancellationToken cancellationToken)
     {
         // Retrieve the Payment based on the provided id parameter.
-        var Payment = await paymentRepository.GetPaymentByIdAsync(request.Id, cancellationToken);
+        var payment = await paymentRepository.GetPaymentByIdAsync(request.Id, cancellationToken);
 
         // If no Payment is found, return an error response.
-        if(Payment is null)
+        if(payment is null)
             return new ApiResponse<PaymentResponse>(ExceptionMessages.NotFoundWithParameter(request.Id));
 
         // Map the Payment to the response model and return a successful response.
-        return new ApiResponse<PaymentResponse>(mapper.Map<PaymentResponse>(Payment));
+        return new ApiResponse<PaymentResponse>(mapper.Map<PaymentResponse>(payment));
     }
 }

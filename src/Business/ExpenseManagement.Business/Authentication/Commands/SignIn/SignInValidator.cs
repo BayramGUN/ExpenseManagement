@@ -21,7 +21,7 @@ public class SignInValidator : AbstractValidator<SignInRequest>
 
         RuleFor(x => x.Password).NotNull().NotEmpty()
             .MinimumLength(8)
-            .MaximumLength(16);
+            .MaximumLength(30);
 
     }
 
