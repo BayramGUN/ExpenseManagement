@@ -1,4 +1,5 @@
 
+using ExpenseManagement.Api.Caching;
 using ExpenseManagement.Base.Constants.Cors;
 using ExpenseManagement.Base.JsonFiles;
 using ExpenseManagement.Base.LoggingInformation;
@@ -24,7 +25,7 @@ public static class DependencyInjection
     public static IServiceCollection AddPresentation(
         this IServiceCollection services)
     {
-
+        services.AddScoped<ICacheService, CacheService>();
         // Add controllers with FluentValidation support
         services.AddControllers().AddFluentValidation(x => {
             x.RegisterValidatorsFromAssemblyContaining<SignUpValidator>();
