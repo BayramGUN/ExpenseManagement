@@ -4,6 +4,10 @@
 
 >This project is an expense management application API provider. Created for patika.dev & Akbank .Net Bootcamp final-case.
 
+### Presentation Video
+
+[![Video](https://cdn.loom.com/sessions/thumbnails/ace6a3a10d1241799430b7689002bc5e-with-play.gif)](https://www.loom.com/share/ace6a3a10d1241799430b7689002bc5e)
+
 ### Build/Run Operations
 
 >Run Command:
