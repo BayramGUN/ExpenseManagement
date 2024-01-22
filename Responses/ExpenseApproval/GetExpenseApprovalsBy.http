@@ -1,0 +1,35 @@
+@host=https://localhost:7066
+@token=ey.JjLBw..
+
+
+#optional
+@status=1
+#optional
+@approverId=1
+
+
+GET {{host}}/api/ExpenseApprovals/GetBy?Status={{status}}&ApproverId={{approverId}}
+Authorization: Bearer {{token}}
+
+#{
+#  "response": [
+#    {
+#      "id": 1,
+#      "approverName": "Basri Bal",
+#      "description": "Nasıl bilinmeyen bir harcama?",
+#      "status": "Rejected",
+#      "expenseTitle": "Fotoğraf"
+#    },
+#    {
+#      "id": 2,
+#      "approverName": "Basri Bal",
+#      "description": "Nasıl bilinmeyen bir harcama ule?",
+#      "status": "Rejected",
+#      "expenseTitle": "Fotoğraf Çekindik"
+#    }
+#  ],
+#  "success": true,
+#  "message": "Success",
+#  "serverDate": "2024-01-19T23:34:31.0867865Z",
+#  "referenceNo": "2cd56e7e-b136-46f0-be60-d445cc670eff"
+#}

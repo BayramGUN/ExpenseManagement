@@ -1,0 +1,24 @@
+@host=https://localhost:7066
+@token=ey.JjLBw..
+
+@id=1
+
+
+GET {{host}}/api/ExpenseApprovals/GetExpenseApprovalById/{{id}}
+Authorization: Bearer {{token}}
+
+# Response be like:
+
+#{
+#  "response": {
+#      "id": 1,
+#      "approverName": "Basri Bal",
+#      "description": "Nasıl bilinmeyen bir harcama?",
+#      "status": "Rejected",
+#      "expenseTitle": "Fotoğraf"
+#  },
+#  "success": true,
+#  "message": "Success",
+#  "serverDate": "2024-01-19T23:57:09.879562Z",
+#  "referenceNo": "e2848b73-f725-4ad6-82a2-8f119aef6d83"
+#}
