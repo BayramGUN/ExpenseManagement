@@ -39,9 +39,10 @@ public class ApiResponse
     public ApiResponse(string? message = null)
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     {
-        if (string.IsNullOrWhiteSpace(message))
+        if (string.IsNullOrWhiteSpace(message) || message.Contains("successfully!"))
         {
             Success = true;
+            Message = message!;
         }
         else
         {

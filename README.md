@@ -120,3 +120,4 @@ See More On Postman](https://documenter.getpostman.com/view/17157290/2s9YymFPsU#
 - [RabbitMq](https://www.rabbitmq.com/documentation.html)
 - [MassTransit](https://masstransit.io/documentation/concepts)
 - [Dapper](https://github.com/DapperLib/Dapper)
+- [Redis](https://redis.io/docs/connect/clients/dotnet/)
