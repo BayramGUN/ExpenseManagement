@@ -1,12 +1,9 @@
-using System.Net.Http.Headers;
 using ExpenseManagement.Api;
 using ExpenseManagement.Api.Middlewares;
-using ExpenseManagement.Base.JsonFiles;
 using ExpenseManagement.Business;
 using ExpenseManagement.Data;
 using ExpenseManagement.Data.DbContexts;
 using ExpenseManagement.Data.DbSeed;
-using Serilog;
 
 
 var builder = WebApplication.CreateBuilder(args);
